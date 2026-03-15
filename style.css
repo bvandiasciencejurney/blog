@@ -207,12 +207,32 @@ section img {
       padding: 2rem 1rem 1rem 1rem;
     }
 
-    .article-header h2 {
-      font-size: 1.8rem;
-      margin-bottom: 0.5rem;
-      color: #333;
-      line-height: 1.3;
-    }
+.article-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.3rem;
+  font-weight: 800;
+  line-height: 1.25;
+  color: #111;
+  max-width: 760px;
+  margin: 0 auto 0.8rem auto;
+  letter-spacing: -0.3px;
+}
+.article-header::after {
+  content: "";
+  display: block;
+  width: 70px;
+  height: 3px;
+  background: var(--accent);
+  margin: 1rem auto 0 auto;
+  border-radius: 2px;
+}
+
+@media (max-width: 768px) {
+  .article-header h2 {
+    font-size: 1.7rem;
+    line-height: 1.3;
+  }
+}
 
     .article-date {
       color: #888;
@@ -234,7 +254,6 @@ section img {
   color: #999;
   font-size: 0.95rem;
 }
-
 /* --- Bagian yang Diperbarui --- */
 
 /* 1. Efek Drop Cap (Huruf Besar di Awal) */
@@ -266,7 +285,12 @@ section img {
   width: 100%;
   height: 100%;
 }
-
+.video-label{
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  color: #666;
+  margin-bottom: 6px;
+}
 /* 2. Style Quote yang Lebih Elegan */
 blockquote {
   font-family: 'Georgia', serif;
@@ -533,8 +557,9 @@ blockquote::before {
 .footer-title {
   color: #fff;
   font-weight: bold;
-  margin-bottom: 1rem;
+  margin-bottom: 18px;
   letter-spacing: 0.5px;
+  
 }
 
 .footer-social {
@@ -555,6 +580,11 @@ blockquote::before {
 
 .footer-social a:hover {
   color: #f2a900;
+}
+.footer-tagline{
+font-size:0.9rem;
+color:#888;
+margin-bottom:18px;
 }
 
 .footer-copy {
