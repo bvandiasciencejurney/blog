@@ -1,0 +1,1705 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[JUDUL ARTIKEL] | Bvandia Science Journey</title>
+
+  <!-- SEO & Open Graph -->
+  <meta name="description" content="[DESKRIPSI SINGKAT ARTIKEL]">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Bvandia Science Journey">
+  <meta property="og:title" content="[JUDUL ARTIKEL]">
+  <meta property="og:description" content="[DESKRIPSI SINGKAT ARTIKEL]">
+  <meta property="og:url" content="https://bvandiasciencejurney.github.io/[SLUG-ARTIKEL]">
+  <meta property="og:image" content="[URL GAMBAR COVER]">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    /* ============================================
+       DESIGN TOKENS — synced with index.html palette
+    ============================================ */
+    :root {
+      --bg:          #fafafa;
+      --bg-card:     #ffffff;
+      --bg-hover:    #f0f0f0;
+      --text:        #222222;
+      --text-muted:  #555555;
+      --text-dim:    #888888;
+      --gold:        #f2a900;
+      --gold-light:  #f5bc33;
+      --blue:        #2e7aad;
+      --blue-light:  #4a9ed4;
+      --mark-bg:     rgba(242, 169, 0, 0.15);
+      --mark-border: rgba(242, 169, 0, 0.4);
+      --divider:     rgba(10, 10, 10, 0.10);
+      --radius-sm:   6px;
+      --radius-md:   12px;
+      --radius-lg:   20px;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body:    'Inter', system-ui, sans-serif;
+      --font-mono:    'JetBrains Mono', 'Courier New', monospace;
+      --max-prose:    680px;
+      --transition:   0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ============================================
+       RESET & BASE
+    ============================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-weight: 400;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+      background-image: radial-gradient(#e5e5e5 1px, transparent 1px);
+      background-size: 30px 30px;
+    }
+
+    ::selection {
+      background: rgba(242, 169, 0, 0.3);
+      color: var(--text);
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { color: var(--blue-light); text-decoration: underline; }
+
+    /* ============================================
+       READING PROGRESS BAR
+    ============================================ */
+    #reading-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--gold), var(--blue));
+      z-index: 9999;
+      transition: width 0.1s linear;
+    }
+
+    /* ============================================
+       HEADER
+    ============================================ */
+    header {
+      background: linear-gradient(180deg, #0a0a0a 0%, #111111 100%);
+      border-bottom: 1px solid rgba(242, 169, 0, 0.2);
+      padding: 1.25rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .header-inner {
+      max-width: 1140px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+    }
+
+    .logo-wrap img {
+      width: 32px;
+      height: 32px;
+    }
+
+    .logo-text {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+    }
+
+    .logo-text span { color: var(--gold); }
+
+    /* NAV */
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    nav a {
+      font-family: var(--font-body);
+      font-size: 0.825rem;
+      font-weight: 500;
+      color: #aaaaaa;
+      text-decoration: none;
+      padding: 0.4rem 0.85rem;
+      border-radius: var(--radius-sm);
+      transition: color var(--transition), background var(--transition);
+      letter-spacing: 0.03em;
+    }
+
+    nav a:hover {
+      color: #ffffff;
+      background: rgba(255,255,255,0.08);
+      text-decoration: none;
+    }
+
+    nav a.active {
+      color: var(--gold);
+      background: rgba(242, 169, 0, 0.1);
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #ffffff;
+      font-size: 1.2rem;
+      padding: 0.25rem;
+    }
+
+    /* ============================================
+       HERO / ARTICLE HEADER
+    ============================================ */
+    .article-hero {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-image-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 21/9;
+      overflow: hidden;
+    }
+
+    @media (max-width: 768px) {
+      .hero-image-wrap { aspect-ratio: 16/9; }
+    }
+
+    .hero-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .hero-image-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        transparent 40%,
+        rgba(250,250,250,0.6) 70%,
+        var(--bg) 100%
+      );
+    }
+
+    .hero-caption {
+      position: absolute;
+      bottom: 1rem;
+      right: 1.25rem;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: rgba(34,34,34,0.5);
+      z-index: 1;
+    }
+
+    /* ARTICLE META HEADER */
+    .article-meta-header {
+      max-width: var(--max-prose);
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 0;
+    }
+
+    .article-category {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(242, 169, 0, 0.1);
+      border: 1px solid rgba(242, 169, 0, 0.2);
+      padding: 0.3rem 0.75rem;
+      border-radius: 99px;
+      margin-bottom: 1.25rem;
+    }
+
+    .article-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.9rem, 5vw, 3rem);
+      font-weight: 900;
+      line-height: 1.2;
+      color: var(--text);
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .article-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 1.75rem;
+      font-weight: 300;
+    }
+
+    .article-byline {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-top: 1px solid var(--divider);
+      border-bottom: 1px solid var(--divider);
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .byline-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--blue));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--bg);
+      flex-shrink: 0;
+    }
+
+    .byline-info {
+      flex: 1;
+    }
+
+    .byline-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+
+    .byline-meta {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 0.15rem;
+    }
+
+    .byline-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .byline-meta i { font-size: 0.7rem; color: var(--gold); }
+
+    /* ============================================
+       LAYOUT: PROSE + STICKY TOC
+    ============================================ */
+    .article-layout {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    @media (max-width: 960px) {
+      .article-layout {
+        grid-template-columns: 1fr;
+      }
+      .toc-sidebar { display: none; }
+    }
+
+    /* ============================================
+       TABLE OF CONTENTS (Sidebar)
+    ============================================ */
+    .toc-sidebar {
+      position: sticky;
+      top: 80px;
+    }
+
+    .toc-box {
+      background: var(--bg-card);
+      border: 1px solid var(--divider);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+    }
+
+    .toc-title {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.875rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .toc-list {
+      list-style: none;
+    }
+
+    .toc-list li + li { margin-top: 0.1rem; }
+
+    .toc-list a {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      display: block;
+      padding: 0.3rem 0.5rem;
+      border-radius: var(--radius-sm);
+      border-left: 2px solid transparent;
+      transition: all var(--transition);
+      line-height: 1.4;
+    }
+
+    .toc-list a:hover,
+    .toc-list a.active {
+      color: var(--gold);
+      background: rgba(242, 169, 0, 0.08);
+      border-left-color: var(--gold);
+      text-decoration: none;
+    }
+
+    /* ============================================
+       ARTICLE CONTENT — PROSE
+    ============================================ */
+    .article-content {
+      min-width: 0;
+    }
+
+    .prose {
+      max-width: var(--max-prose);
+    }
+
+    .prose p {
+      font-size: 1.0625rem;
+      line-height: 1.85;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+
+    /* Drop cap for first paragraph */
+    .prose > p:first-of-type::first-letter {
+      font-family: var(--font-display);
+      font-size: 4rem;
+      font-weight: 900;
+      float: left;
+      line-height: 0.85;
+      margin-right: 0.1em;
+      margin-top: 0.08em;
+      color: var(--gold);
+    }
+
+    .prose h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 3vw, 1.75rem);
+      font-weight: 700;
+      color: var(--text);
+      margin-top: 3rem;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+      padding-top: 1rem;
+      border-top: 1px solid var(--divider);
+    }
+
+    .prose h3 {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+      font-style: italic;
+    }
+
+    .prose strong { color: var(--text); font-weight: 600; }
+
+    .prose em { color: var(--text-muted); }
+
+    .prose mark {
+      background: var(--mark-bg);
+      color: var(--gold-light);
+      padding: 0.1em 0.3em;
+      border-radius: 3px;
+      border-bottom: 1px solid var(--mark-border);
+    }
+
+    .prose a {
+      color: var(--blue);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: rgba(74,158,191,0.4);
+    }
+
+    .prose a:hover {
+      color: var(--blue-light);
+      text-decoration-color: var(--blue-light);
+    }
+
+    /* ============================================
+       ARTICLE ILLUSTRATION & CAPTION
+    ============================================ */
+    .article-figure {
+      margin: 2.5rem 0;
+    }
+
+    .article-figure img {
+      width: 100%;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--divider);
+    }
+
+    .article-caption {
+      margin-top: 0.6rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      text-align: center;
+    }
+
+    /* ============================================
+       PULL QUOTE (Blockquote)
+    ============================================ */
+    .pull-quote {
+      position: relative;
+      margin: 2.5rem 0;
+      padding: 1.75rem 2rem 1.75rem 2.5rem;
+      background: var(--bg-card);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      overflow: hidden;
+    }
+
+    .pull-quote::before {
+      content: '\201C';
+      font-family: var(--font-display);
+      font-size: 6rem;
+      color: rgba(242, 169, 0, 0.12);
+      position: absolute;
+      top: -0.5rem;
+      left: 0.75rem;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .pull-quote p {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-style: italic;
+      line-height: 1.65;
+      color: var(--text);
+      margin: 0 0 0.5rem;
+    }
+
+    .pull-quote cite {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--gold);
+      font-style: normal;
+      letter-spacing: 0.05em;
+    }
+
+    /* ============================================
+       HIGHLIGHT BOX / CALLOUT
+    ============================================ */
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.25rem 1.5rem;
+      border-radius: var(--radius-md);
+      margin: 2rem 0;
+      align-items: flex-start;
+    }
+
+    .callout-info {
+      background: rgba(74, 158, 191, 0.08);
+      border: 1px solid rgba(74, 158, 191, 0.2);
+    }
+
+    .callout-insight {
+      background: rgba(242, 169, 0, 0.08);
+      border: 1px solid rgba(242, 169, 0, 0.2);
+    }
+
+    .callout-warning {
+      background: rgba(220, 100, 80, 0.08);
+      border: 1px solid rgba(220, 100, 80, 0.2);
+    }
+
+    .callout-icon {
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .callout-info .callout-icon { color: var(--blue); }
+    .callout-insight .callout-icon { color: var(--gold); }
+    .callout-warning .callout-icon { color: #DC6450; }
+
+    .callout-body p {
+      font-size: 0.925rem;
+      margin: 0;
+      line-height: 1.65;
+      color: var(--text);
+    }
+
+    .callout-body strong { font-weight: 600; }
+
+    /* ============================================
+       TIMELINE COMPONENT
+    ============================================ */
+    .timeline {
+      position: relative;
+      margin: 2.5rem 0;
+      padding-left: 0;
+      list-style: none;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 1.4rem;
+      top: 0.5rem;
+      bottom: 0.5rem;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 3.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .timeline-item:last-child { margin-bottom: 0; }
+
+    .timeline-dot {
+      position: absolute;
+      left: 0.95rem;
+      top: 0.4rem;
+      width: 0.9rem;
+      height: 0.9rem;
+      background: var(--bg);
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      transition: background var(--transition);
+    }
+
+    .timeline-item:hover .timeline-dot {
+      background: var(--gold);
+    }
+
+    .timeline-year {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      margin-bottom: 0.3rem;
+      display: block;
+    }
+
+    .timeline-heading {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+
+    .timeline-body {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* ============================================
+       DIALOG / CONVERSATION COMPONENT
+    ============================================ */
+    .dialog-box {
+      margin: 2.5rem 0;
+      background: var(--bg-card);
+      border: 1px solid var(--divider);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .dialog-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.75rem 1.25rem;
+      background: rgba(0,0,0,0.03);
+      border-bottom: 1px solid var(--divider);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      letter-spacing: 0.06em;
+    }
+
+    .dialog-header i { color: var(--gold); }
+
+    .dialog-body {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .dialog-line {
+      display: flex;
+      gap: 0.875rem;
+      align-items: flex-start;
+    }
+
+    .dialog-line.right {
+      flex-direction: row-reverse;
+    }
+
+    .dialog-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      flex-shrink: 0;
+      font-family: var(--font-display);
+      font-weight: 700;
+    }
+
+    .dialog-avatar.av-a {
+      background: linear-gradient(135deg, #2e7aad, #1a5a8a);
+      color: white;
+    }
+
+    .dialog-avatar.av-b {
+      background: linear-gradient(135deg, var(--gold), #c08800);
+      color: var(--bg);
+    }
+
+    .dialog-bubble {
+      max-width: 78%;
+      background: rgba(0,0,0,0.04);
+      border-radius: var(--radius-md);
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+      line-height: 1.65;
+      color: var(--text);
+      border: 1px solid var(--divider);
+    }
+
+    .dialog-line.right .dialog-bubble {
+      background: rgba(242, 169, 0, 0.08);
+      border-color: rgba(242, 169, 0, 0.15);
+    }
+
+    .dialog-speaker {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      margin-bottom: 0.3rem;
+      display: block;
+      letter-spacing: 0.05em;
+    }
+
+    .dialog-line.right .dialog-speaker {
+      text-align: right;
+      color: rgba(242, 169, 0, 0.6);
+    }
+
+    /* ============================================
+       VIDEO EMBED
+    ============================================ */
+    .video-wrap {
+      margin: 2.5rem 0;
+    }
+
+    .video-label {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .video-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--divider);
+    }
+
+    .video-iframe-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--divider);
+    }
+
+    .video-iframe-wrap iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* ============================================
+       KEY CONCEPT CARD
+    ============================================ */
+    .concept-card {
+      background: var(--bg-card);
+      border: 1px solid var(--divider);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      margin: 2rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .concept-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--blue));
+    }
+
+    .concept-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .concept-term {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.6rem;
+    }
+
+    .concept-body {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* ============================================
+       REFERENCES
+    ============================================ */
+    .references-section {
+      max-width: var(--max-prose);
+      margin: 3rem 0 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--divider);
+    }
+
+    .references-title {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .references-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--divider);
+    }
+
+    .references-list {
+      list-style: none;
+      counter-reset: ref;
+    }
+
+    .references-list li {
+      counter-increment: ref;
+      display: flex;
+      gap: 1rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.875rem;
+      line-height: 1.55;
+    }
+
+    .references-list li::before {
+      content: counter(ref);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--gold);
+      background: rgba(242, 169, 0, 0.1);
+      border-radius: 4px;
+      width: 1.4rem;
+      height: 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 0.05rem;
+    }
+
+    .references-list a {
+      color: var(--blue);
+    }
+
+    /* ============================================
+       REACTION + SHARE
+    ============================================ */
+    .article-feedback {
+      max-width: var(--max-prose);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 2rem 0;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .reaction-group {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .reaction-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.85rem;
+      font-family: var(--font-body);
+      font-weight: 500;
+      color: var(--text-muted);
+      background: var(--bg-card);
+      border: 1px solid var(--divider);
+      border-radius: 99px;
+      padding: 0.45rem 1rem;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .reaction-btn:hover {
+      color: var(--text);
+      border-color: rgba(0,0,0,0.15);
+      background: var(--bg-hover);
+    }
+
+    .reaction-btn.active {
+      color: var(--gold);
+      border-color: rgba(242, 169, 0, 0.5);
+      background: rgba(242, 169, 0, 0.12);
+      transform: scale(1.05);
+      box-shadow: 0 0 0 3px rgba(242, 169, 0, 0.15);
+    }
+
+    .reaction-btn.active i {
+      animation: pop 0.35s cubic-bezier(0.34,1.56,0.64,1);
+    }
+
+    @keyframes pop {
+      0%   { transform: scale(1); }
+      50%  { transform: scale(1.45); }
+      100% { transform: scale(1); }
+    }
+
+    .reaction-btn.disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      pointer-events: none;
+      transform: scale(1);
+    }
+
+    /* Toast notification */
+    .feedback-toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: #1a1a1a;
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 500;
+      padding: 0.7rem 1.4rem;
+      border-radius: 99px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      white-space: nowrap;
+    }
+
+    .feedback-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .feedback-toast i { color: var(--gold); }
+
+    .share-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      font-family: var(--font-body);
+      font-weight: 500;
+      color: var(--bg);
+      background: var(--gold);
+      border: none;
+      border-radius: 99px;
+      padding: 0.45rem 1.25rem;
+      cursor: pointer;
+      transition: background var(--transition), transform var(--transition);
+    }
+
+    .share-btn:hover {
+      background: var(--gold-light);
+      transform: translateY(-1px);
+    }
+
+    /* ============================================
+       RELATED ARTICLES
+    ============================================ */
+    .related-section {
+      max-width: var(--max-prose);
+      margin: 3rem 0;
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--divider);
+    }
+
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    @media (max-width: 560px) {
+      .related-grid { grid-template-columns: 1fr; }
+    }
+
+    .related-card {
+      background: var(--bg-card);
+      border: 1px solid var(--divider);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      text-decoration: none;
+      display: block;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+
+    .related-card:hover {
+      border-color: rgba(242, 169, 0, 0.25);
+      transform: translateY(-2px);
+      text-decoration: none;
+    }
+
+    .related-card-category {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .related-card-title {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.35;
+    }
+
+    /* BACK LINK */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 0.5rem 0;
+      transition: color var(--transition);
+      margin-bottom: 1rem;
+    }
+
+    .back-link:hover {
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    /* ============================================
+       FOOTER
+    ============================================ */
+    footer {
+      background: var(--bg-card);
+      border-top: 1px solid var(--divider);
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+
+    .footer-inner {
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+
+    .footer-logo span { color: var(--gold); }
+
+    .footer-tagline {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-social {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-social a {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.05);
+      border: 1px solid var(--divider);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      transition: all var(--transition);
+      text-decoration: none;
+    }
+
+    .footer-social a:hover {
+      color: var(--gold);
+      border-color: rgba(242, 169, 0, 0.3);
+      background: rgba(242, 169, 0, 0.08);
+    }
+
+    .footer-copy {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-dim);
+    }
+
+    /* ============================================
+       SCROLL REVEAL ANIMATION
+    ============================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    /* ============================================
+       MOBILE NAV
+    ============================================ */
+    @media (max-width: 640px) {
+      .hamburger { display: flex; }
+
+      nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0; right: 0;
+        background: #111111;
+        border-bottom: 1px solid rgba(242, 169, 0, 0.2);
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0.5rem;
+      }
+
+      nav.open { display: flex; }
+
+      nav a {
+        padding: 0.65rem 1rem;
+        font-size: 0.9rem;
+      }
+    }
+
+    /* ============================================
+       UTILITY
+    ============================================ */
+    hr.divider {
+      border: none;
+      border-top: 1px solid var(--divider);
+      margin: 2.5rem 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== READING PROGRESS ========== -->
+  <div id="reading-progress"></div>
+
+  <!-- ========== HEADER ========== -->
+  <header>
+    <div class="header-inner">
+      <a class="logo-wrap" href="index.html">
+        <img src="logo.svg" alt="Logo Bvandia">
+        <span class="logo-text">Bvandia <span>Science</span> Journey</span>
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+      <nav id="main-nav">
+        <a href="index.html">Home</a>
+        <a href="artikel.html" class="active">Articles</a>
+        <a href="about.html">About</a>
+        <a href="kontak.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========== HERO IMAGE ========== -->
+  <div class="article-hero">
+    <div class="hero-image-wrap">
+      <!-- GANTI: src dengan URL gambar cover artikel -->
+      <img src="[URL_GAMBAR_COVER]" alt="[DESKRIPSI GAMBAR]" id="hero-img">
+      <span class="hero-caption">Illustration by [NAMA ILUSTRATOR]</span>
+    </div>
+  </div>
+
+  <!-- ========== ARTICLE META ========== -->
+  <div class="article-meta-header">
+    <!-- GANTI: teks kategori -->
+    <span class="article-category">
+      <i class="fas fa-globe-asia"></i>
+      Geopolitik &amp; Sains
+    </span>
+
+    <!-- GANTI: judul artikel -->
+    <h1 class="article-title">Judul Artikel Kamu Di Sini</h1>
+
+    <!-- GANTI: subjudul / deskripsi singkat -->
+    <p class="article-subtitle">
+      Satu kalimat pembuka yang menarik perhatian pembaca — bisa berupa pertanyaan, pernyataan kuat, atau paradoks yang relevan dengan isi artikel.
+    </p>
+
+    <div class="article-byline">
+      <div class="byline-avatar">B</div>
+      <div class="byline-info">
+        <div class="byline-name">Bvandia</div>
+        <div class="byline-meta">
+          <!-- GANTI: tanggal dan estimasi baca -->
+          <span><i class="fas fa-calendar-alt"></i> 10 Maret 2026</span>
+          <span><i class="fas fa-stopwatch"></i> <span id="reading-time">—</span> menit membaca</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== ARTICLE LAYOUT ========== -->
+  <div class="article-layout">
+
+    <!-- MAIN CONTENT -->
+    <article class="article-content">
+      <a href="artikel.html" class="back-link">
+        <i class="fas fa-arrow-left"></i> Kembali ke artikel
+      </a>
+
+      <div class="prose" id="article-prose">
+
+        <!-- ✏️ PARAGRAF PERTAMA: kata pertama akan jadi drop cap otomatis -->
+        <p>
+          Tuliskan paragraf pembuka di sini. Kata pertama akan otomatis muncul sebagai drop cap bergaya editorial. Gunakan paragraf ini untuk langsung masuk ke inti persoalan — jangan buang momentum pembaca dengan basa-basi.
+        </p>
+
+        <p>
+          Paragraf kedua. Lanjutkan narasi. Kamu bisa <strong>menebalkan konsep penting</strong>, menambahkan <em>penekanan dengan italic</em>, atau menggunakan <mark>highlight emas untuk frasa kunci</mark> yang ingin diingat pembaca.
+        </p>
+
+        <!-- ──────────────────────────────────────
+             CONTOH: PULL QUOTE
+             Gunakan untuk kalimat paling kuat dalam artikel
+        ────────────────────────────────────── -->
+        <blockquote class="pull-quote reveal">
+          <p>Kedamaian itu sunyi, perang itu gaduh. Yang terlihat adalah ancaman dan konflik, sementara keberhasilan menjaga stabilitas justru tidak memiliki panggung.</p>
+          <cite>— Nama Sumber / Penulis</cite>
+        </blockquote>
+
+        <p>
+          Lanjutkan narasi setelah pull quote. Bangun argumen secara bertahap. Hubungkan satu paragraf ke paragraf berikutnya dengan transisi yang alami.
+        </p>
+
+        <!-- ──────────────────────────────────────
+             CONTOH: CALLOUT BOX
+             Tersedia 3 jenis: callout-info, callout-insight, callout-warning
+        ────────────────────────────────────── -->
+        <div class="callout callout-insight reveal">
+          <span class="callout-icon"><i class="fas fa-lightbulb"></i></span>
+          <div class="callout-body">
+            <p><strong>Insight Utama:</strong> Gunakan callout box ini untuk menuliskan poin penting, fakta mengejutkan, atau kesimpulan yang ingin kamu sorot dari paragraf sebelumnya.</p>
+          </div>
+        </div>
+
+        <div class="callout callout-info reveal">
+          <span class="callout-icon"><i class="fas fa-circle-info"></i></span>
+          <div class="callout-body">
+            <p><strong>Konteks:</strong> Ini adalah callout biru — cocok untuk konteks tambahan, definisi, atau informasi latar belakang yang membantu pembaca memahami topik.</p>
+          </div>
+        </div>
+
+        <!-- ──────────────────────────────────────
+             CONTOH: SECTION HEADING H2
+        ────────────────────────────────────── -->
+        <h2 id="section-1">Nama Bagian Pertama</h2>
+
+        <p>
+          Isi paragraf setelah heading H2. Heading H2 akan otomatis muncul di daftar isi (sidebar kanan di desktop). Pastikan setiap H2 punya <code>id</code> yang unik.
+        </p>
+
+        <!-- ──────────────────────────────────────
+             CONTOH: TIMELINE
+             Cocok untuk sejarah, kronologi kejadian, dll.
+        ────────────────────────────────────── -->
+        <ul class="timeline reveal">
+          <li class="timeline-item">
+            <div class="timeline-dot"></div>
+            <span class="timeline-year">1945</span>
+            <div class="timeline-heading">Akhir Perang Dunia II</div>
+            <p class="timeline-body">Runtuhnya tatanan lama mendorong lahirnya institusi internasional baru. Dunia berjanji untuk tidak mengulangi tragedi yang sama.</p>
+          </li>
+          <li class="timeline-item">
+            <div class="timeline-dot"></div>
+            <span class="timeline-year">1947 – 1991</span>
+            <div class="timeline-heading">Era Perang Dingin</div>
+            <p class="timeline-body">Dua blok besar saling bersaing namun menahan diri dari konflik langsung karena kesadaran akan kehancuran bersama.</p>
+          </li>
+          <li class="timeline-item">
+            <div class="timeline-dot"></div>
+            <span class="timeline-year">1991</span>
+            <div class="timeline-heading">Runtuhnya Uni Soviet</div>
+            <p class="timeline-body">Berakhirnya Perang Dingin membuka era globalisasi dan ketergantungan antarnegara yang semakin dalam.</p>
+          </li>
+          <li class="timeline-item">
+            <div class="timeline-dot"></div>
+            <span class="timeline-year">Hari Ini</span>
+            <div class="timeline-heading">Era Ketidakpastian Baru</div>
+            <p class="timeline-body">Fondasi tatanan global mulai terasa goyah. Kepercayaan antarnegara diuji oleh berbagai konflik dan rivalitas strategis.</p>
+          </li>
+        </ul>
+
+        <!-- ──────────────────────────────────────
+             CONTOH: GAMBAR / ILUSTRASI
+        ────────────────────────────────────── -->
+        <figure class="article-figure reveal">
+          <!-- GANTI: src dan alt -->
+          <img src="https://cdn.oase.id/dynamic/2023/07/19/3376/CpVR7OQBqk.jpeg?w=500" alt="[DESKRIPSI GAMBAR]">
+          <figcaption class="article-caption">Source: [Nama Sumber] | [URL atau Publikasi]</figcaption>
+        </figure>
+
+        <p>
+          Lanjutkan narasi setelah gambar. Kamu bisa menjelaskan apa yang terlihat di gambar atau menggunakannya sebagai jembatan ke argumen berikutnya.
+        </p>
+
+        <!-- ──────────────────────────────────────
+             CONTOH: KEY CONCEPT CARD
+             Cocok untuk istilah teknis / konsep kunci
+        ────────────────────────────────────── -->
+        <div class="concept-card reveal">
+          <div class="concept-label">Konsep Kunci</div>
+          <div class="concept-term">Security Dilemma</div>
+          <p class="concept-body">Situasi di mana tindakan defensif suatu negara (seperti memperkuat militer) justru diinterpretasikan sebagai ancaman oleh negara lain — sehingga memicu siklus ketidakpercayaan dan eskalasi yang tidak diinginkan oleh pihak manapun.</p>
+        </div>
+
+        <h2 id="section-2">Nama Bagian Kedua</h2>
+
+        <p>
+          Isi paragraf bagian kedua. Topik baru bisa dimulai dari sini. Ingat — setiap H2 akan muncul di daftar isi, jadi beri nama yang deskriptif.
+        </p>
+
+        <!-- ──────────────────────────────────────
+             CONTOH: PERCAKAPAN / DIALOG
+             Cocok untuk debat dua sudut pandang, tanya-jawab, wawancara singkat
+        ────────────────────────────────────── -->
+        <div class="dialog-box reveal">
+          <div class="dialog-header">
+            <i class="fas fa-comments"></i>
+            Dua Perspektif: Apakah diplomasi masih relevan?
+          </div>
+          <div class="dialog-body">
+            <div class="dialog-line">
+              <div class="dialog-avatar av-a">R</div>
+              <div>
+                <span class="dialog-speaker">Realist</span>
+                <div class="dialog-bubble">Di dunia tanpa "penjaga" yang netral, negara tidak bisa bergantung pada niat baik. Kekuatan militer adalah satu-satunya bahasa yang dipahami semua pihak.</div>
+              </div>
+            </div>
+            <div class="dialog-line right">
+              <div class="dialog-avatar av-b">L</div>
+              <div>
+                <span class="dialog-speaker">Liberalist</span>
+                <div class="dialog-bubble">Justru karena itu, institusi internasional ada. Kerja sama bukan utopia — ia adalah respons rasional terhadap ketergantungan. Perang merugikan semua pihak.</div>
+              </div>
+            </div>
+            <div class="dialog-line">
+              <div class="dialog-avatar av-a">R</div>
+              <div>
+                <span class="dialog-speaker">Realist</span>
+                <div class="dialog-bubble">Tapi institusi hanya kuat selama negara-negara kuat memilihnya. Lihat bagaimana PBB lumpuh ketika kepentingan P5 bertabrakan.</div>
+              </div>
+            </div>
+            <div class="dialog-line right">
+              <div class="dialog-avatar av-b">L</div>
+              <div>
+                <span class="dialog-speaker">Liberalist</span>
+                <div class="dialog-bubble">Benar. Tapi ketiadaan institusi bukan solusi — itu kemunduran. Perbaiki sistemnya, jangan buang fondasi yang sudah ada.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ──────────────────────────────────────
+             CONTOH: VIDEO EMBED
+        ────────────────────────────────────── -->
+        <div class="video-wrap reveal">
+          <div class="video-label"><i class="fas fa-play-circle"></i> Reference Video</div>
+          <div class="video-iframe-wrap">
+            <!-- GANTI: src dengan URL embed YouTube yang benar -->
+            <iframe
+              src="https://www.youtube.com/embed/VIDEO_ID_DISINI"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              title="Judul Video Referensi">
+            </iframe>
+          </div>
+        </div>
+
+        <h2 id="section-3">Penutup dan Refleksi</h2>
+
+        <p>
+          Bagian penutup. Jangan sekadar merangkum — bawa pembaca ke satu kesimpulan yang terasa seperti pencapaian. Apa yang berubah dalam cara berpikir setelah membaca artikel ini?
+        </p>
+
+        <blockquote class="pull-quote reveal">
+          <p>Kegelisahan bukan tanda kelemahan iman atau keputusasaan. Ia bisa menjadi tanda kesadaran — dan mungkin, kesadaran adalah langkah pertama yang paling berani.</p>
+        </blockquote>
+
+        <p>
+          Paragraf terakhir. Tutup dengan kalimat yang membuat pembaca berpikir, atau ajakan bertindak yang tulus.
+        </p>
+
+      </div><!-- /prose -->
+
+      <!-- ──────────────────────────────────────
+           REFERENCES
+      ────────────────────────────────────── -->
+      <div class="references-section reveal">
+        <div class="references-title"><i class="fas fa-book-open"></i> Referensi</div>
+        <ol class="references-list">
+          <li>
+            <div><strong>Nama Penulis.</strong> <em>Judul Buku/Artikel.</em> Penerbit, Tahun.</div>
+          </li>
+          <li>
+            <div><strong>Nama Lembaga.</strong> <a href="[URL]" target="_blank" rel="noopener"><em>"Judul Artikel Online."</em></a> Diakses Tahun.</div>
+          </li>
+          <li>
+            <div><strong>Nama Penulis Ketiga.</strong> <em>Judul Sumber Ketiga.</em> Publikasi, Tahun.</div>
+          </li>
+        </ol>
+      </div>
+
+      <!-- ──────────────────────────────────────
+           FEEDBACK & SHARE
+      ────────────────────────────────────── -->
+      <div class="article-feedback reveal">
+        <div class="reaction-group">
+          <button class="reaction-btn" data-response="menyala">
+            <i class="fas fa-fire"></i> Menyala
+          </button>
+          <button class="reaction-btn" data-response="informatif">
+            <i class="fas fa-brain"></i> Informatif
+          </button>
+          <button class="reaction-btn" data-response="kurang">
+            <i class="far fa-face-meh"></i> Kurang
+          </button>
+        </div>
+        <button class="share-btn" id="share-btn">
+          <i class="fas fa-share-nodes"></i> Bagikan
+        </button>
+      </div>
+
+      <!-- ──────────────────────────────────────
+           RELATED ARTICLES
+      ────────────────────────────────────── -->
+      <div class="related-section reveal">
+        <div class="section-label"><i class="fas fa-layer-group"></i> Artikel Terkait</div>
+        <div class="related-grid">
+          <!-- GANTI: href, kategori, dan judul -->
+          <a href="artikel-1.html" class="related-card">
+            <span class="related-card-category">Sains</span>
+            <div class="related-card-title">Judul Artikel Terkait Pertama Yang Relevan</div>
+          </a>
+          <a href="artikel-2.html" class="related-card">
+            <span class="related-card-category">Opini</span>
+            <div class="related-card-title">Judul Artikel Terkait Kedua Yang Relevan</div>
+          </a>
+        </div>
+      </div>
+
+    </article><!-- /article-content -->
+
+    <!-- ========== SIDEBAR TOC ========== -->
+    <aside class="toc-sidebar">
+      <div class="toc-box">
+        <div class="toc-title"><i class="fas fa-list"></i> Daftar Isi</div>
+        <ul class="toc-list" id="toc-list">
+          <!-- Diisi otomatis oleh JS -->
+        </ul>
+      </div>
+    </aside>
+
+  </div><!-- /article-layout -->
+
+  <!-- ========== FOOTER ========== -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">Bvandia <span>Science</span> Journey</div>
+      <p class="footer-tagline">Exploring science, ideas, and reflections about the world.</p>
+      <div class="footer-social">
+        <a href="mailto:bimasaktiawannn@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        <a href="https://www.instagram.com/bvandia" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.tiktok.com/@bvandia.science" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+        <a href="https://www.linkedin.com/in/bima-saktiawan-502875352" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      </div>
+      <p class="footer-copy">© 2026 Bvandia Science Journey · Built with curiosity</p>
+    </div>
+  </footer>
+
+  <!-- ========== EmailJS SDK ========== -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <!-- ========== SCRIPTS ========== -->
+  <script>
+    // ── READING PROGRESS BAR
+    window.addEventListener('scroll', () => {
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      document.getElementById('reading-progress').style.width = ((scrollTop / scrollHeight) * 100) + '%';
+    });
+
+    // ── READING TIME
+    document.addEventListener('DOMContentLoaded', () => {
+      const prose = document.getElementById('article-prose');
+      if (prose) {
+        const words = prose.innerText.trim().split(/\s+/).length;
+        document.getElementById('reading-time').textContent = Math.ceil(words / 200);
+      }
+    });
+
+    // ── AUTO GENERATE TOC
+    document.addEventListener('DOMContentLoaded', () => {
+      const headings = document.querySelectorAll('.prose h2');
+      const tocList = document.getElementById('toc-list');
+      if (!tocList) return;
+
+      headings.forEach(h => {
+        if (!h.id) {
+          h.id = h.textContent.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+        }
+        const li = document.createElement('li');
+        li.innerHTML = `<a href="#${h.id}">${h.textContent}</a>`;
+        tocList.appendChild(li);
+      });
+
+      // TOC active highlight on scroll
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          const id = entry.target.getAttribute('id');
+          const link = tocList.querySelector(`a[href="#${id}"]`);
+          if (link) link.classList.toggle('active', entry.isIntersecting);
+        });
+      }, { rootMargin: '-20% 0% -70% 0%' });
+
+      headings.forEach(h => observer.observe(h));
+    });
+
+    // ── SCROLL REVEAL
+    document.addEventListener('DOMContentLoaded', () => {
+      const reveals = document.querySelectorAll('.reveal');
+      const revealObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      reveals.forEach(el => revealObserver.observe(el));
+    });
+
+    // ── HAMBURGER MENU
+    document.getElementById('hamburger')?.addEventListener('click', () => {
+      document.getElementById('main-nav').classList.toggle('open');
+    });
+
+    // ── EMAILJS INIT
+    emailjs.init('iBzBlCz0Yz5iIT_gW');
+
+    // ── TOAST HELPER
+    function showToast(icon, message) {
+      let toast = document.getElementById('feedback-toast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'feedback-toast';
+        toast.className = 'feedback-toast';
+        document.body.appendChild(toast);
+      }
+      toast.innerHTML = `<i class="${icon}"></i> ${message}`;
+      toast.classList.add('show');
+      clearTimeout(toast._timer);
+      toast._timer = setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+    // ── REACTION BUTTONS
+    let reactionSent = false;
+    document.querySelectorAll('.reaction-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        if (reactionSent) return;
+        reactionSent = true;
+
+        const response = btn.dataset.response;
+        const labels = { menyala: '🔥 Menyala', informatif: '🧠 Informatif', kurang: '😑 Kurang' };
+
+        // Visual feedback langsung
+        document.querySelectorAll('.reaction-btn').forEach(b => {
+          b.classList.toggle('active', b === btn);
+          b.classList.toggle('disabled', b !== btn);
+        });
+
+        showToast('fas fa-paper-plane', 'Mengirim feedback...');
+
+        try {
+          await emailjs.send('service_26uhlsy', 'template_dowhmdr', {
+            article_title: document.title,
+            reader_response: response,
+            page_url: window.location.href,
+            time: new Date().toLocaleString('id-ID', { dateStyle: 'full', timeStyle: 'short' })
+          });
+
+          showToast('fas fa-check-circle', `Terima kasih! Kamu memilih "${labels[response] || response}"`);
+        } catch (err) {
+          showToast('fas fa-heart', `Feedback "${labels[response] || response}" tercatat!`);
+          console.warn('EmailJS error:', err);
+        }
+      });
+    });
+
+    // ── SHARE BUTTON
+    document.getElementById('share-btn')?.addEventListener('click', () => {
+      if (navigator.share) {
+        navigator.share({
+          title: document.title,
+          text: 'Aku baru membaca tulisan ini, mungkin kamu juga tertarik.',
+          url: window.location.href
+        });
+      } else {
+        const url = encodeURIComponent(window.location.href);
+        const text = encodeURIComponent('Aku baru membaca tulisan ini:');
+        window.open(`https://wa.me/?text=${text}%20${url}`, '_blank');
+      }
+    });
+
+    // ── AUTO ACTIVE NAV
+    document.addEventListener('DOMContentLoaded', () => {
+      const currentPage = location.pathname.split('/').pop() || 'index.html';
+      document.querySelectorAll('nav a').forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === currentPage);
+      });
+    });
+  </script>
+<script src="transition.js"></script>
+
+</body>
+</html>

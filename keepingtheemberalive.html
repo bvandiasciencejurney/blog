@@ -1,0 +1,1625 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keeping the Ember Alive | Bvandia Science Journey</title>
+
+  <!-- SEO & Open Graph -->
+  <meta name="description" content="Pemuda abad-21 yang menjadi penerus estafet peradaban dengan semangat keberanian  dan keyakinannya akan berfikir adalah hal yang mutlak dan tak terbatas, sehingga ia tidak pernah takut untuk terus berfikir dan bertanya untuk mendapatkan secerca cahaya.">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Bvandia Science Journey">
+  <meta property="og:title" content="Keeping the Ember Alive">
+  <meta property="og:description" content="Pemuda abad-21 yang menjadi penerus estafet peradaban dengan semangat keberanian  dan keyakinannya akan berfikir adalah hal yang mutlak dan tak terbatas, sehingga ia tidak pernah takut untuk terus berfikir dan bertanya untuk mendapatkan secerca cahaya.">
+  <meta property="og:url" content="https://bvandiasciencejurney.github.io/keepingtheemberalive.html">
+  <meta property="og:image" content="keepingtheemberalive.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    /* ============================================
+       DESIGN TOKENS — synced with index.html palette
+    ============================================ */
+    :root {
+      --bg:          #fafafa;
+      --bg-card:     #ffffff;
+      --bg-hover:    #f0f0f0;
+      --text:        #222222;
+      --text-muted:  #555555;
+      --text-dim:    #888888;
+      --gold:        #f2a900;
+      --gold-light:  #f5bc33;
+      --blue:        #2e7aad;
+      --blue-light:  #4a9ed4;
+      --mark-bg:     rgba(242, 169, 0, 0.15);
+      --mark-border: rgba(242, 169, 0, 0.4);
+      --divider:     rgba(10, 10, 10, 0.10);
+      --radius-sm:   6px;
+      --radius-md:   12px;
+      --radius-lg:   20px;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body:    'Inter', system-ui, sans-serif;
+      --font-mono:    'JetBrains Mono', 'Courier New', monospace;
+      --max-prose:    680px;
+      --transition:   0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ============================================
+       RESET & BASE
+    ============================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-weight: 400;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+      background-image: radial-gradient(#e5e5e5 1px, transparent 1px);
+      background-size: 30px 30px;
+    }
+
+    ::selection {
+      background: rgba(242, 169, 0, 0.3);
+      color: var(--text);
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { color: var(--blue-light); text-decoration: underline; }
+
+    /* ============================================
+       READING PROGRESS BAR
+    ============================================ */
+    #reading-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--gold), var(--blue));
+      z-index: 9999;
+      transition: width 0.1s linear;
+    }
+
+    /* ============================================
+       HEADER
+    ============================================ */
+    header {
+      background: linear-gradient(180deg, #0a0a0a 0%, #111111 100%);
+      border-bottom: 1px solid rgba(242, 169, 0, 0.2);
+      padding: 1.25rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .header-inner {
+      max-width: 1140px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+    }
+
+    .logo-wrap img {
+      width: 32px;
+      height: 32px;
+    }
+
+    .logo-text {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+    }
+
+    .logo-text span { color: var(--gold); }
+
+    /* NAV */
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    nav a {
+      font-family: var(--font-body);
+      font-size: 0.825rem;
+      font-weight: 500;
+      color: #aaaaaa;
+      text-decoration: none;
+      padding: 0.4rem 0.85rem;
+      border-radius: var(--radius-sm);
+      transition: color var(--transition), background var(--transition);
+      letter-spacing: 0.03em;
+    }
+
+    nav a:hover {
+      color: #ffffff;
+      background: rgba(255,255,255,0.08);
+      text-decoration: none;
+    }
+
+    nav a.active {
+      color: var(--gold);
+      background: rgba(242, 169, 0, 0.1);
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #ffffff;
+      font-size: 1.2rem;
+      padding: 0.25rem;
+    }
+
+    /* ============================================
+       HERO / ARTICLE HEADER
+    ============================================ */
+    .article-hero {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-image-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 21/9;
+      overflow: hidden;
+    }
+
+    @media (max-width: 768px) {
+      .hero-image-wrap { aspect-ratio: 16/9; }
+    }
+
+    .hero-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .hero-image-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        transparent 40%,
+        rgba(250,250,250,0.6) 70%,
+        var(--bg) 100%
+      );
+    }
+
+    .hero-caption {
+      position: absolute;
+      bottom: 1rem;
+      right: 1.25rem;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: rgba(34,34,34,0.5);
+      z-index: 1;
+    }
+
+    /* ARTICLE META HEADER */
+    .article-meta-header {
+      max-width: var(--max-prose);
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 0;
+    }
+
+    .article-category {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(242, 169, 0, 0.1);
+      border: 1px solid rgba(242, 169, 0, 0.2);
+      padding: 0.3rem 0.75rem;
+      border-radius: 99px;
+      margin-bottom: 1.25rem;
+    }
+
+    .article-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.9rem, 5vw, 3rem);
+      font-weight: 900;
+      line-height: 1.2;
+      color: var(--text);
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .article-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 1.75rem;
+      font-weight: 300;
+    }
+
+    .article-byline {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-top: 1px solid var(--divider);
+      border-bottom: 1px solid var(--divider);
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .byline-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--blue));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--bg);
+      flex-shrink: 0;
+    }
+
+    .byline-info {
+      flex: 1;
+    }
+
+    .byline-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+
+    .byline-meta {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 0.15rem;
+    }
+
+    .byline-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .byline-meta i { font-size: 0.7rem; color: var(--gold); }
+
+    /* ============================================
+       LAYOUT: PROSE + STICKY TOC
+    ============================================ */
+    .article-layout {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    @media (max-width: 960px) {
+      .article-layout {
+        grid-template-columns: 1fr;
+      }
+      .toc-sidebar { display: none; }
+    }
+
+    /* ============================================
+       TABLE OF CONTENTS (Sidebar)
+    ============================================ */
+    .toc-sidebar {
+      position: sticky;
+      top: 80px;
+    }
+
+    .toc-box {
+      background: var(--bg-card);
+      border: 1px solid var(--divider);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+    }
+
+    .toc-title {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.875rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .toc-list {
+      list-style: none;
+    }
+
+    .toc-list li + li { margin-top: 0.1rem; }
+
+    .toc-list a {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      display: block;
+      padding: 0.3rem 0.5rem;
+      border-radius: var(--radius-sm);
+      border-left: 2px solid transparent;
+      transition: all var(--transition);
+      line-height: 1.4;
+    }
+
+    .toc-list a:hover,
+    .toc-list a.active {
+      color: var(--gold);
+      background: rgba(242, 169, 0, 0.08);
+      border-left-color: var(--gold);
+      text-decoration: none;
+    }
+
+    /* ============================================
+       ARTICLE CONTENT — PROSE
+    ============================================ */
+    .article-content {
+      min-width: 0;
+    }
+
+    .prose {
+      max-width: var(--max-prose);
+    }
+
+    .prose p {
+      font-size: 1.0625rem;
+      line-height: 1.85;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+
+    /* Drop cap for first paragraph */
+    .prose > p:first-of-type::first-letter {
+      font-family: var(--font-display);
+      font-size: 4rem;
+      font-weight: 900;
+      float: left;
+      line-height: 0.85;
+      margin-right: 0.1em;
+      margin-top: 0.08em;
+      color: var(--gold);
+    }
+
+    .prose h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 3vw, 1.75rem);
+      font-weight: 700;
+      color: var(--text);
+      margin-top: 3rem;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+      padding-top: 1rem;
+      border-top: 1px solid var(--divider);
+    }
+
+    .prose h3 {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+      font-style: italic;
+    }
+
+    .prose strong { color: var(--text); font-weight: 600; }
+
+    .prose em { color: var(--text-muted); }
+
+    .prose mark {
+      background: var(--mark-bg);
+      color: var(--gold-light);
+      padding: 0.1em 0.3em;
+      border-radius: 3px;
+      border-bottom: 1px solid var(--mark-border);
+    }
+
+    .prose a {
+      color: var(--blue);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: rgba(74,158,191,0.4);
+    }
+
+    .prose a:hover {
+      color: var(--blue-light);
+      text-decoration-color: var(--blue-light);
+    }
+
+    /* ============================================
+       ARTICLE ILLUSTRATION & CAPTION
+    ============================================ */
+    .article-figure {
+      margin: 2.5rem 0;
+    }
+
+    .article-figure img {
+      width: 100%;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--divider);
+    }
+
+    .article-caption {
+      margin-top: 0.6rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      text-align: center;
+    }
+
+    /* ============================================
+       PULL QUOTE (Blockquote)
+    ============================================ */
+    .pull-quote {
+      position: relative;
+      margin: 2.5rem 0;
+      padding: 1.75rem 2rem 1.75rem 2.5rem;
+      background: var(--bg-card);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      overflow: hidden;
+    }
+
+    .pull-quote::before {
+      content: '\201C';
+      font-family: var(--font-display);
+      font-size: 6rem;
+      color: rgba(242, 169, 0, 0.12);
+      position: absolute;
+      top: -0.5rem;
+      left: 0.75rem;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .pull-quote p {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-style: italic;
+      line-height: 1.65;
+      color: var(--text);
+      margin: 0 0 0.5rem;
+    }
+
+    .pull-quote cite {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--gold);
+      font-style: normal;
+      letter-spacing: 0.05em;
+    }
+
+    /* ============================================
+       HIGHLIGHT BOX / CALLOUT
+    ============================================ */
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.25rem 1.5rem;
+      border-radius: var(--radius-md);
+      margin: 2rem 0;
+      align-items: flex-start;
+    }
+
+    .callout-info {
+      background: rgba(74, 158, 191, 0.08);
+      border: 1px solid rgba(74, 158, 191, 0.2);
+    }
+
+    .callout-insight {
+      background: rgba(242, 169, 0, 0.08);
+      border: 1px solid rgba(242, 169, 0, 0.2);
+    }
+
+    .callout-warning {
+      background: rgba(220, 100, 80, 0.08);
+      border: 1px solid rgba(220, 100, 80, 0.2);
+    }
+
+    .callout-icon {
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .callout-info .callout-icon { color: var(--blue); }
+    .callout-insight .callout-icon { color: var(--gold); }
+    .callout-warning .callout-icon { color: #DC6450; }
+
+    .callout-body p {
+      font-size: 0.925rem;
+      margin: 0;
+      line-height: 1.65;
+      color: var(--text);
+    }
+
+    .callout-body strong { font-weight: 600; }
+
+    /* ============================================
+       TIMELINE COMPONENT
+    ============================================ */
+    .timeline {
+      position: relative;
+      margin: 2.5rem 0;
+      padding-left: 0;
+      list-style: none;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 1.4rem;
+      top: 0.5rem;
+      bottom: 0.5rem;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 3.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .timeline-item:last-child { margin-bottom: 0; }
+
+    .timeline-dot {
+      position: absolute;
+      left: 0.95rem;
+      top: 0.4rem;
+      width: 0.9rem;
+      height: 0.9rem;
+      background: var(--bg);
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      transition: background var(--transition);
+    }
+
+    .timeline-item:hover .timeline-dot {
+      background: var(--gold);
+    }
+
+    .timeline-year {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      margin-bottom: 0.3rem;
+      display: block;
+    }
+
+    .timeline-heading {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+
+    .timeline-body {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* ============================================
+       DIALOG / CONVERSATION COMPONENT
+    ============================================ */
+    .dialog-box {
+      margin: 2.5rem 0;
+      background: var(--bg-card);
+      border: 1px solid var(--divider);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .dialog-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.75rem 1.25rem;
+      background: rgba(0,0,0,0.03);
+      border-bottom: 1px solid var(--divider);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      letter-spacing: 0.06em;
+    }
+
+    .dialog-header i { color: var(--gold); }
+
+    .dialog-body {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .dialog-line {
+      display: flex;
+      gap: 0.875rem;
+      align-items: flex-start;
+    }
+
+    .dialog-line.right {
+      flex-direction: row-reverse;
+    }
+
+    .dialog-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      flex-shrink: 0;
+      font-family: var(--font-display);
+      font-weight: 700;
+    }
+
+    .dialog-avatar.av-a {
+      background: linear-gradient(135deg, #2e7aad, #1a5a8a);
+      color: white;
+    }
+
+    .dialog-avatar.av-b {
+      background: linear-gradient(135deg, var(--gold), #c08800);
+      color: var(--bg);
+    }
+
+    .dialog-bubble {
+      max-width: 78%;
+      background: rgba(0,0,0,0.04);
+      border-radius: var(--radius-md);
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+      line-height: 1.65;
+      color: var(--text);
+      border: 1px solid var(--divider);
+    }
+
+    .dialog-line.right .dialog-bubble {
+      background: rgba(242, 169, 0, 0.08);
+      border-color: rgba(242, 169, 0, 0.15);
+    }
+
+    .dialog-speaker {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      margin-bottom: 0.3rem;
+      display: block;
+      letter-spacing: 0.05em;
+    }
+
+    .dialog-line.right .dialog-speaker {
+      text-align: right;
+      color: rgba(242, 169, 0, 0.6);
+    }
+
+    /* ============================================
+       VIDEO EMBED
+    ============================================ */
+    .video-wrap {
+      margin: 2.5rem 0;
+    }
+
+    .video-label {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .video-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--divider);
+    }
+
+    .video-iframe-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--divider);
+    }
+
+    .video-iframe-wrap iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* ============================================
+       KEY CONCEPT CARD
+    ============================================ */
+    .concept-card {
+      background: var(--bg-card);
+      border: 1px solid var(--divider);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      margin: 2rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .concept-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--blue));
+    }
+
+    .concept-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .concept-term {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.6rem;
+    }
+
+    .concept-body {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* ============================================
+       REFERENCES
+    ============================================ */
+    .references-section {
+      max-width: var(--max-prose);
+      margin: 3rem 0 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--divider);
+    }
+
+    .references-title {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .references-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--divider);
+    }
+
+    .references-list {
+      list-style: none;
+      counter-reset: ref;
+    }
+
+    .references-list li {
+      counter-increment: ref;
+      display: flex;
+      gap: 1rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.875rem;
+      line-height: 1.55;
+    }
+
+    .references-list li::before {
+      content: counter(ref);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--gold);
+      background: rgba(242, 169, 0, 0.1);
+      border-radius: 4px;
+      width: 1.4rem;
+      height: 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 0.05rem;
+    }
+
+    .references-list a {
+      color: var(--blue);
+    }
+
+    /* ============================================
+       REACTION + SHARE
+    ============================================ */
+    .article-feedback {
+      max-width: var(--max-prose);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 2rem 0;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .reaction-group {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .reaction-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.85rem;
+      font-family: var(--font-body);
+      font-weight: 500;
+      color: var(--text-muted);
+      background: var(--bg-card);
+      border: 1px solid var(--divider);
+      border-radius: 99px;
+      padding: 0.45rem 1rem;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .reaction-btn:hover {
+      color: var(--text);
+      border-color: rgba(0,0,0,0.15);
+      background: var(--bg-hover);
+    }
+
+    .reaction-btn.active {
+      color: var(--gold);
+      border-color: rgba(242, 169, 0, 0.5);
+      background: rgba(242, 169, 0, 0.12);
+      transform: scale(1.05);
+      box-shadow: 0 0 0 3px rgba(242, 169, 0, 0.15);
+    }
+
+    .reaction-btn.active i {
+      animation: icon-pop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes icon-pop {
+      0%   { transform: scale(1); }
+      50%  { transform: scale(1.5); }
+      100% { transform: scale(1); }
+    }
+
+    .reaction-btn.disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      pointer-events: none;
+      transform: scale(1);
+    }
+
+    /* ── TOAST */
+    .feedback-toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: #1a1a1a;
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 500;
+      padding: 0.7rem 1.4rem;
+      border-radius: 99px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      white-space: nowrap;
+    }
+
+    .feedback-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .feedback-toast i { color: var(--gold); }
+
+    .share-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      font-family: var(--font-body);
+      font-weight: 500;
+      color: var(--bg);
+      background: var(--gold);
+      border: none;
+      border-radius: 99px;
+      padding: 0.45rem 1.25rem;
+      cursor: pointer;
+      transition: background var(--transition), transform var(--transition);
+    }
+
+    .share-btn:hover {
+      background: var(--gold-light);
+      transform: translateY(-1px);
+    }
+
+    /* ============================================
+       RELATED ARTICLES
+    ============================================ */
+    .related-section {
+      max-width: var(--max-prose);
+      margin: 3rem 0;
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--divider);
+    }
+
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    @media (max-width: 560px) {
+      .related-grid { grid-template-columns: 1fr; }
+    }
+
+    .related-card {
+      background: var(--bg-card);
+      border: 1px solid var(--divider);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      text-decoration: none;
+      display: block;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+
+    .related-card:hover {
+      border-color: rgba(242, 169, 0, 0.25);
+      transform: translateY(-2px);
+      text-decoration: none;
+    }
+
+    .related-card-category {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .related-card-title {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.35;
+    }
+
+    /* BACK LINK */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 0.5rem 0;
+      transition: color var(--transition);
+      margin-bottom: 1rem;
+    }
+
+    .back-link:hover {
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    /* ============================================
+       FOOTER
+    ============================================ */
+    footer {
+      background: var(--bg-card);
+      border-top: 1px solid var(--divider);
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+
+    .footer-inner {
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+
+    .footer-logo span { color: var(--gold); }
+
+    .footer-tagline {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-social {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-social a {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.05);
+      border: 1px solid var(--divider);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      transition: all var(--transition);
+      text-decoration: none;
+    }
+
+    .footer-social a:hover {
+      color: var(--gold);
+      border-color: rgba(242, 169, 0, 0.3);
+      background: rgba(242, 169, 0, 0.08);
+    }
+
+    .footer-copy {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-dim);
+    }
+
+    /* ============================================
+       SCROLL REVEAL ANIMATION
+    ============================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    /* ============================================
+       MOBILE NAV
+    ============================================ */
+    @media (max-width: 640px) {
+      .hamburger { display: flex; }
+
+      nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0; right: 0;
+        background: #111111;
+        border-bottom: 1px solid rgba(242, 169, 0, 0.2);
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0.5rem;
+      }
+
+      nav.open { display: flex; }
+
+      nav a {
+        padding: 0.65rem 1rem;
+        font-size: 0.9rem;
+      }
+    }
+
+    /* ============================================
+       UTILITY
+    ============================================ */
+    hr.divider {
+      border: none;
+      border-top: 1px solid var(--divider);
+      margin: 2.5rem 0;
+    }
+    
+.visitor-counter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin: 0.8rem 0;
+  font-size: 0.82rem;
+  color: #777;
+}
+.visitor-counter i {
+  color: #f2a900;
+}
+.counter-badge {
+  height: 20px;
+  border-radius: 4px;
+}
+    
+  </style>
+</head>
+<body>
+
+  <!-- ========== READING PROGRESS ========== -->
+  <div id="reading-progress"></div>
+
+  <!-- ========== HEADER ========== -->
+  <header>
+    <div class="header-inner">
+      <a class="logo-wrap" href="index.html">
+        <img src="logo.svg" alt="Logo Bvandia">
+        <span class="logo-text">Bvandia <span>Science</span> Journey</span>
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+      <nav id="main-nav">
+        <a href="index.html">Home</a>
+        <a href="artikel.html" class="active">Articles</a>
+        <a href="about.html">About</a>
+        <a href="kontak.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========== HERO IMAGE ========== -->
+  <div class="article-hero">
+    <div class="hero-image-wrap">
+      <!-- GANTI: src dengan URL gambar cover artikel -->
+      <img src="keepingtheemberalive.png" alt="Diskusi antara sang pemuda dan orang tua paruh baya" id="hero-img">
+      <span class="hero-caption">Illustration by ChatGPT</span>
+    </div>
+  </div>
+
+  <!-- ========== ARTICLE META ========== -->
+  <div class="article-meta-header">
+    <!-- GANTI: teks kategori -->
+<span class="article-category">
+  <i class="fas fa-brain"></i>
+  Filsafat &amp; Kontemporer
+</span>
+
+
+    <!-- GANTI: judul artikel -->
+    <h1 class="article-title">Keeping The Ember Alive</h1>
+
+    <!-- GANTI: subjudul / deskripsi singkat -->
+    <p class="article-subtitle">
+      Pemuda abad-21 yang menjadi penerus estafet peradaban dengan semangat keberanian  dan keyakinannya akan berfikir adalah hal yang mutlak dan tak terbatas, sehingga ia tidak pernah takut untuk terus berfikir dan bertanya untuk mendapatkan secerca cahaya.
+    </p>
+
+    <div class="article-byline">
+      <div class="byline-avatar">B</div>
+      <div class="byline-info">
+        <div class="byline-name">Bima Saktiawan</div>
+        <div class="byline-meta">
+          <!-- GANTI: tanggal dan estimasi baca -->
+          <span><i class="fas fa-calendar-alt"></i> 12 Juni 2026</span>
+          <span><i class="fas fa-stopwatch"></i> <span id="reading-time">—</span> menit membaca</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== ARTICLE LAYOUT ========== -->
+  <div class="article-layout">
+
+    <!-- MAIN CONTENT -->
+    <article class="article-content">
+      <a href="artikel.html" class="back-link">
+        <i class="fas fa-arrow-left"></i> Kembali ke artikel
+      </a>
+
+      <div class="prose" id="article-prose">
+
+        <!-- ✏️ PARAGRAF PERTAMA: kata pertama akan jadi drop cap otomatis -->
+        <p>
+          Generasi Stroberi, <em>Snowflake</em>, manja, pemalas, dan si paling <em>mental health</em>. Stigma-stigma itulah yang kerap disematkan kepada pemuda abad ke-21 ini. Namun baginya, semua label itu tidak lagi berarti apa-apa. Mungkin, pikirnya, semua itu memang ada benarnya. </p>
+          <p>Pemuda ini memiliki isi kepala yang dianggap terlalu "liar" oleh lingkungannya sendiri. Tapi baginya, kebebasan berpikir adalah hak mutlak tanpa batas. Itulah mengapa ia tidak pernah lari dari isi kepalanya sendiri. Namun sayang, keberanian untuk menjadi liar ini sering kali berbenturan dengan realitas. Setiap kali ia mencoba menuangkan pemikirannya ke orang-orang di sekitar, ia selalu ditentang secara mentah-mentah. Bahkan tidak jarang di sebut sebagai pembangkang.
+        </p>
+        <p>Karena itulah ia memilih jalan lain yaitu dengan <em>menulis</em>. Ia mengabadikan setiap jengkal pemikirannya di catatan fisik maupun digital. Ketika lembaran catatan itu mulai menumpuk dan mengkristal menjadi pertanyaan-pertanyaan besar yang butuh jawaban, ia tahu ke mana harus pergi. Beruntung nya ia memiliki seorang kerabat jauh. Seorang tua bangka, begitu ia kerap menyebutnya secara kelakar, namun ia adalah seorang intelektual sejati. Sifat intelektual itulah yang membuat si tua tampak berbeda dan jauh lebih keren baginya.</p>
+        <p>Sore itu, ketika sebuah pertanyaan besar kembali mengusik benaknya, secara spontan ia langsung bergegas mencatatnya di ponsel hingga langsung melangkah menemui si intelektual tua tersebut. Pemuda itu dapat tiba ketika langit mulai memerah. Ia langsung mengambil tempat di kursi kayu beranda rumah sederhana yang menghadap langsung ke hamparan sawah. Di hadapannya, duduk <strong>Hugo</strong>—lelaki paruh baya berambut memutih. Wajahnya tenang, dengan tatapan mata yang memancarkan berbagai misteri dunia di setiap kedipannya.</p>
+        <p>Si pemuda langsung membuka ponselnya, lalu membacakan renungan yang ditulisnya tadi sore dengan suara pelan.</p>
+        
+                <div class="concept-card reveal">
+          <div class="concept-label">Isi Catatan</div>
+          <div class="concept-term">8 Juni 2026</div>
+          <p class="concept-body">Bagaimanapun juga, aku selalu percaya pada kebaikan Tuhan. Hanya saja, cara-Nya mewujudkan kebaikan tersebut kerap menjadi misteri. Alhasil, kita hanya bisa berasumsi tentang niat-Nya berdasarkan situasi yang sedang kita hadapi atau dari sudut pandang kita saat ini.</p>
+          <p>Padahal, sudut pandang itu sangat bias; sangat mudah dipengaruhi oleh suasana hati, emosi, ego, dan banyak hal tersembunyi yang belum bisa kita raba. Itulah kenapa hal terbaik yang bisa kita lakukan hanyalah menghadapinya. Kita semua punya peran masing-masing dalam lika-liku peradaban manusia.</p>
+          <p>Namun, di tengah keadaan yang terpuruk dan sistem yang hampir ambruk, bukankah masuk akal jika <em>manusia melakukan segala cara demi tetap waras? Bukankah itu naluri dasar untuk bertahan hidup di tengah gempuran badai? </em>Lalu,  <em>apakah pantas manusia yang sekadar menjalankan naluri bertahannya dihukum seolah-olah semua keadaan ini berada di bawah kendali mereka?</em></p>
+          <p>Aku yakin, ketika seseorang yang berpendidikan dan sadar akan dampak perbuatannya melakukan sesuatu yang dianggap 'buruk', di lubuk hati terdalamnya, mereka sebenarnya tidak ingin melakukan kebodohan itu. Ini tentu mengecualikan mereka yang memang pendek akal atau tidak teredukasi.</p>
+        </div>
+        
+        <p>Setelah selesai, ia menatap Hugo dengan sepasang mata yang menyiratkan kelelahan batin.</p>
+        <p>"Itu yang aku tulis tadi sore," ucap pemuda itu memecah keheningan. "Aku pribadi tetap percaya pada kebaikan Tuhan, meski cara-Nya sering tidak kupahami. Tapi aku juga sadar, penilaian manusia itu sangat bias. Dan aku paham bahwa banyak orang yang kita labeli 'buruk' sebenarnya hanya sedang berjuang hanya untuk bertahan hidup. Dengan begitu muncul sebuah pertanyaan berat di kepalaku, <em>apakah Tuhan akan menghukum manusia atas perilaku yang sebenarnya dikondisikan oleh keadaan mereka?".</em></p>
+        <p>Hugo diam sejenak. Ia menyesap teh hangatnya pelan, lalu meletakkan gelas kaca itu kembali ke meja tanpa suara.</p>
+        <p>"Kamu sedang bergulat dengan pertanyaan yang dalam filsafat dan teologi disebut <strong>theodicy</strong>," ujar Hugo tenang. "Sebuah gugatan tentang bagaimana mungkin Tuhan yang Maha Baik membiarkan kejahatan dan penderitaan ada di dunia. Ribuan tahun manusia mengajukan pertanyaan yang sama. Lewat catatanmu, kamu tidak sedang menolak Tuhan. Kamu justru sedang mengetuk pintu-Nya dengan kejujuran. Itu bukan kelemahan iman, melainkan iman yang berani melihat kenyataan tanpa menutup mata."</p>
+        <p>Hugo menjeda kalimatnya, menatap pemuda itu dengan lebih dalam. "Tapi di balik pertanyaan teologis itu, ada lapisan psikologis yang tidak kalah penting, yaitu <em>mengapa manusia begitu mudah berkompromi dan menyesuaikan diri dengan keburukan-keburukan?</em>"</p>
+        <p>"Itu dia yang kurasakan sekarang, Hugo," sahut si pemuda cepat. "Semakin kupikirkan, semakin banyak pertanyaan baru yang bercabang. Contohnya, hidup di negara kita sekarang... rasanya seperti diuji tanpa henti. Ketidakadilan sistemik, birokrasi yang makin aneh, ketimpangan ekonomi, dan yang paling berat: keburukan yang lama-kelamaan dianggap maklum. Orang-orang sudah terlalu lelah untuk sekadar marah atau sedih."</p>
+        <p>Pemuda itu menghela napas panjang. "Lalu aku bertanya-tanya, <em>apa sebenarnya tujuan Tuhan menciptakan kondisi seperti ini? Di mana empati-Nya?</em> Dulu, ketika peradaban terpuruk, sejarah selalu mencatat hadirnya tokoh besar—entah itu nabi, revolusioner, atau pemikir—yang datang membawa lentera di tengah kegelapan. Sekarang? Di mana mereka? Aku hanya melihat kenaifan dan ego di mana-mana. <em>Apakah manusia memang seburuk itu, atau ada pengondisian massal yang sangat kuat?</em> Dan <em>kalau Tuhan benar-benar baik, mengapa Dia membiarkan manusia dihukum oleh lingkungan yang diciptakan-Nya sendiri?</em>"</p>
+        <p>Hugo mengalihkan pandangannya ke arah sawah yang mulai tenggelam dalam gelap. Angin malam berembus, membawa aroma tanah basah yang pekat.</p>
+        <p>"Kamu sedang menyaksikan sebuah fenomena yang dalam psikologi disebut <strong>moral numbing </strong>atau <strong>psychic numbing</strong>," kata Hugo. "Ketika penderitaan atau keburukan terjadi dalam skala yang masif dan terus-menerus, kapasitas moral manusia untuk merespons justru akan menurun. Ini bukan karena kita mendadak jadi jahat, melainkan karena mekanisme pertahanan psikologis kita sedang bekerja. Otak kita membatasi rasa marah dan sedih demi melindungi diri. Jika tidak, batin kita akan hancur dengan mudah, apalagi sebagai WNI"</p>
+        <p>Hugo memajukan badannya. "Ini bukan sekadar masalah moral personal, ini jauh lebih dalam. Dari sudut pandang evolusi, kita sedang mengalami <strong>evolutionary mismatch</strong>. Otak manusia berevolusi selama ratusan ribu tahun untuk hidup dalam kelompok-kelompok kecil. Kelompok di mana ancaman masih terlihat sangat jelas, konsekuensi suatu tindakan bisa dirasakan langsung, dan kita bisa mengenali semua orang. Namun, dalam dua abad terakhir (<em>terutama tiga dekade belakangan</em>) kita menciptakan sistem raksasa yang jauh lebih abstrak dan lambat dampaknya. Sistem ini bergerak jauh melampaui kapasitas adaptasi otak bilogis kita."</p>
+        <p>"Itulah sebabnya banyak keburukan terasa 'normal'. Bukan karena moralitas manusia menyusut, melainkan karena desain biologis dan psikologis kita tidak lagi cocok dengan lingkungan modern yang bahkan kita ciptakan sendiri."</p>
+        <p>Si pemuda mulai terpaku. "Jadi... apakah kita ini seperti ikan yang dipaksa hidup di darat?"</p>
+        <p>"Persis," Hugo mengangguk. "Dan yang lebih berat, generasimu akan mewarisi sistem yang jauh lebih kompleks dari ini. Di sisi lain, teknologi berkembang secara eksponensial. Fenomena ini sering disebut sebagai <strong>acceleration</strong>—percepatan perkembangan teknologi yang meninggalkan kecepatan adaptasi manusia jauh di belakang."</p>
+        <p>"Lalu di mana peran orang-orang baik itu?" tanya pemuda itu lagi, nadanya mendesak. "Dulu selalu ada tokoh besar yang muncul di tengah kegelapan. Kenapa sekarang seolah tidak ada? Apakah itu hanya sebuah pemanis cerita?"</p>
+        <p>"Mungkin ada namun bentuknya saja yang berubah," jawab Hugo bijak. "Dalam sejarah, setiap kali terjadi akselerasi besar (<em>seperti Revolusi Industri atau lahirnya negara modern</em>) selalu ada periode di mana tokoh-tokoh besar seolah 'menghilang' dari panggung sebelum akhirnya lahir kembali dalam wujud yang baru. Saat ini, perlawanan mungkin tidak lagi dipimpin oleh satu sosok karismatik seperti yang ada di benak kita. Perlawanan itu kini dilakukan secara kolektif oleh ribuan orang kecil yang memilih untuk <strong>tidak ikut mati rasa</strong>. Mereka bukan pemimpin revolusi di koran-koran, tetapi merekalah yang perlahan mengubah definisi 'normal' di lingkungan terkecil mereka."</p>
+        <p>"Tapi aku takut, Hugo," aku si pemuda jujur. "Aku takut masa depan akan semakin buruk. Manusia belajar terlalu lambat, sementara teknologi berlari sangat cepat. Apakah kita sedang menuju kehancuran total or <strong>chaos</strong> something like that? Atau... kita justru menuju sistem pengendalian yang super ketat oleh segelintir kelompok elite seperti apa yang di ceritakan oleh <em>Orwell</em> dalam buku <em>1984</em>?"</p>
+        
+                <div class="callout callout-info reveal">
+          <span class="callout-icon"><i class="fas fa-circle-info"></i></span>
+          <div class="callout-body">
+            <p><strong>Konteks:</strong> 1984 adalah novel fiksi distopia klasik karya George Orwell yang diterbitkan pada tahun 1949. Buku ini menggambarkan masyarakat masa depan yang dikuasai oleh rezim totaliter ekstrem di bawah kendali diktator Big Brother (Kakak Besar), di mana kebebasan individu ditekan, privasi tidak ada, dan sejarah dimanipulasi.</p>
+          </div>
+        </div>
+        
+        <p>Hugo menatap pemuda itu cukup lama, menakar kecemasan yang menggelayuti wajah muda di depannya. Malam makin larut, dan bayang-bayang di beranda terasa makin pekat, seolah ikut menegaskan distopia yang baru saja diucapkan.</p>
+        <p>"Kedua kemungkinan itu nyata, dan sialnya, keduanya sedang berjalan beriringan," kata Hugo datar.</p>
+        <p>"Kemungkinan pertama adalah <em>chaos</em>—kondisi di mana manusia secara kolektif kewalahan menghadapi kompleksitas global. Dalam teori kompleksitas, ketika sebuah sistem menjadi terlalu rumit hingga tidak bisa lagi dipahami oleh mayoritas penghuninya, sistem itu akan menjadi tidak stabil. Kepercayaan runtuh, masyarakat bereaksi murni dengan emosi, dan keteraturan sosial menjadi sebuah barang mewah. Dan tidak menutup kemungkinan akan terjadinya kerusuhan dan demo besar-besaran di setiap penjuru dunia."</p>
+        <p>Hugo menjeda kalimatnya, lalu tersenyum getir. "Sementara kemungkinan kedua yang kamu sebutkan tadi... dunia ala Orwell dalam <em>1984</em>. Bedanya, di abad ke-21 ini, kemunculan 'Big Brother' tidak lagi berwujud fasisme militer yang kasar dengan sepatu laras dan layar pengintai di sudut ruang tamu. Bentuk pengendalian baru ini jauh lebih halus, lebih intim, dan justru kita undang sendiri ke dalam saku celana kita."</p>
+        <p>"Ketika terjadi <em>information asymmetry</em>—kesenjangan informasi yang masif antara kelompok kecil penguasa data dan algoritma dengan mayoritas massa yang bingung—kekuasaan tidak lagi butuh kawat berduri atau Kementerian Kebenaran. Mereka cukup mengatur apa yang kamu lihat di lini masa, apa yang kamu inginkan lewat iklan yang dipersonalisasi, dan apa yang kamu anggap wajar melalui tren yang dimanipulasi. Kamu akan merasa sangat bebas, padahal seluruh pilihan hidup dan isi kepalamu sudah diarahkan."</p>
+        <p>Hugo menghela napas. "Jika Orwell mencemaskan dunia di mana buku-buku dilarang dan informasi disensor, apa yang kita hadapi sekarang justru lebih dekat pada kecemasan Aldous Huxley dalam <em>Brave New World</em> dimana kita dibanjiri oleh terlalu banyak informasi hingga kita menjadi pasif, egois, dan kehilangan kemampuan untuk peduli. Ini bukan teori konspirasi. Ini adalah konsekuensi logis dari jurang teknologi di era digital."</p>
+        
+      <div class="callout callout-info reveal">
+    <span class="callout-icon"><i class="fas fa-circle-info"></i></span>
+     <div class="callout-body">
+      <p><strong>Konteks:</strong> Kecemasan Aldous Huxley dalam Brave New World berpusat pada ketakutan bahwa manusia tidak akan dihancurkan oleh hal-hal yang mereka benci (seperti sensor atau tirani), melainkan oleh hal-hal yang mereka cintai. Dia meramalkan banjir informasi, hiburan tiada henti, dan kesenangan superfisial yang akan mematikan nalar kritis dan empati kita.</p>
+          </div>
+        </div>
+        
+        <p>"Lalu... apakah kita sama sekali tidak punya harapan?" tanya si pemuda, nyaris berbisik.</p>
+        <p>Hugo tersenyum kecil. Sebuah senyuman yang menyiratkan kedewasaan sekaligus kesedihan yang tenang.</p>
+        <p>"Harapan itu tidak akan pernah mati selama masih ada manusia yang bisa bertanya dengan gelisah seperti yang kamu lakukan sore ini. Selama masih ada orang yang menolak tunduk pada kalimat pasrah seperti <em>'ya mau bagaimana lagi, memang begini dunianya.'</em>"</p>
+        <p>"Sepanjang sejarah, manusia terbukti berulang kali mampu menciptakan instrumen baru untuk melampaui keterbatasannya sendiri—kita menciptakan hukum, sains, institusi pendidikan, hingga bentuk spiritualitas yang lebih matang. Hari ini, kita kembali berada di titik krusial di mana kita harus merumuskan struktur baru untuk bertahan."</p>
+        <p>Hugo menepuk bahu pemuda itu. "Yang perlu kamu ingat adalah bahwa kamu tidak mengemban tugas untuk menyelamatkan seluruh dunia. Cukup jadilah manusia yang menolak untuk ikut mati rasa. Cukup menjadi orang yang terus merawat pertanyaan, terus menulis, dan terus memilih untuk menyebarkan kebaikan di lingkaran terdekatmu—meskipun itu tampak kecil dan tidak terlihat oleh dunia."</p>
+        <p>"Sebab sering kali, di tengah kegelapan yang teramat pekat, justru jentik-jentik cahaya kecil itulah yang menjaga peradaban agar tidak sepenuhnya padam."</p>
+        <p>Pemuda itu menunduk. Rasa sesak di dadanya perlahan mencair, digantikan oleh sebentuk ketenangan yang baru. "Terima kasih, Hugo. Aku datang ke sini sebenarnya hanya ingin mengeluh. Tapi aku pulang membawa sesuatu yang jauh lebih berharga."</p>
+        <p>Pemuda itu berdiri dari kursinya, lalu menjabat tangan Hugo dengan erat. "Mungkin aku akan sering datang ke sini lagi. Masih banyak isi kepala yang ingin kubedah."</p>
+        <p>"Rumah ini selalu terbuka untukmu. Datanglah kapan saja," jawab Hugo tulus. "Dan ingat, teruslah menulis. Menjaga api pertanyaan agar tetap menyala adalah tugas terpenting yang bisa dilakukan manusia di zaman seperti ini."</p>
+        <p>Pemuda itu melangkah pergi menembus kegelapan malam. Di genggamannya, layar ponselnya masih menyala, menampilkan bait-bait renungan yang ditulisnya tadi sore. Langkah kakinya terasa jauh lebih ringan. Bukan karena kerumitan dunia di sekitarnya mendadak selesai, melainkan karena ia tahu, di sebuah beranda sunyi pinggir sawah, ada seseorang yang selalu siap menemaninya memandang dunia dengan lebih dalam, jujur, dan berani.</p>
+        <p>Sementara itu di beranda, Hugo masih duduk sendirian. Menatap langit malam yang kelam tanpa bintang, ia berbisik lirih pada angin:</p>
+        <p><center>"Semoga api itu tidak pernah padam."</center></p>
+
+
+
+      </div><!-- /prose -->
+
+<div class="references-section reveal">
+  <div class="references-title"><i class="fas fa-info-circle"></i> Catatan Penulis</div>
+  <div class="disclaimer-text" style="font-size: 0.95rem; line-height: 1.6; color: #555; text-align: justify; margin-top: 10px;">
+    <p>
+      Artikel atau cerita di atas lahir dari sebuah ruang diskusi alternatif. Narasi ini dibentuk berdasarkan hasil obrolan mendalam antara penulis dengan sebuah kecerdasan buatan (Chat AI). Dalam cerita ini, karakter <strong>"Si Pemuda"</strong> merupakan representasi langsung dari pemikiran, kegelisahan, dan argumen asli milik penulis, sementara tokoh <strong>"Hugo"</strong> adalah perwujudan dari Chat AI tersebut.
+    </p>
+    <p style="margin-top: 8px;">
+      Seluruh hasil percakapan dan dialektika tersebut kemudian dirajut, dikurasi, dan dikembangkan kembali secara mandiri oleh penulis menjadi sebuah fiksi filosofis yang lebih terstruktur, organik, dan nyaman untuk dinikmati oleh para pembaca.
+    </p>
+  </div>
+</div>
+
+
+      <!-- ──────────────────────────────────────
+           FEEDBACK & SHARE
+      ────────────────────────────────────── -->
+      <div class="article-feedback reveal">
+        <div class="reaction-group">
+          <button class="reaction-btn" data-response="menyala">
+            <i class="fas fa-fire"></i> Menyala
+          </button>
+          <button class="reaction-btn" data-response="informatif">
+            <i class="fas fa-brain"></i> Informatif
+          </button>
+          <button class="reaction-btn" data-response="kurang">
+            <i class="far fa-face-meh"></i> Kurang
+          </button>
+        </div>
+        <button class="share-btn" id="share-btn">
+          <i class="fas fa-share-nodes"></i> Bagikan
+        </button>
+      </div>
+
+      <!-- ──────────────────────────────────────
+           RELATED ARTICLES
+      ────────────────────────────────────── -->
+      <div class="related-section reveal">
+        <div class="section-label"><i class="fas fa-layer-group"></i> Artikel Terkait</div>
+        <div class="related-grid">
+          <!-- GANTI: href, kategori, dan judul -->
+          <a href="duniahitamputih.html" class="related-card">
+            <span class="related-card-category">Sosial-Politik</span>
+            <div class="related-card-title">Dunia Hitam Putih</div>
+          </a>
+          <a href="spacerace.html" class="related-card">
+            <span class="related-card-category">Sejarah & Teknologi</span>
+            <div class="related-card-title">Space Race</div>
+          </a>
+          </a>
+          <a href="senimengumpat.html" class="related-card">
+            <span class="related-card-category">Sosial & Budaya</span>
+            <div class="related-card-title">Seni Mengumpat: Mengapa Kita Memaki? Mengapa Makian Justru Menjadi Perekat Persahabatan?</div>
+          </a>
+        </div>
+      </div>
+
+    </article><!-- /article-content -->
+
+    <!-- ========== SIDEBAR TOC ========== -->
+    <aside class="toc-sidebar">
+      <div class="toc-box">
+        <div class="toc-title"><i class="fas fa-list"></i> Daftar Isi</div>
+        <ul class="toc-list" id="toc-list">
+          <!-- Diisi otomatis oleh JS -->
+        </ul>
+      </div>
+    </aside>
+
+  </div><!-- /article-layout -->
+
+  <!-- ========== FOOTER ========== -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">Bvandia <span>Science</span> Journey</div>
+      <p class="footer-tagline">Exploring science, ideas, and reflections about the world.</p>
+      <div class="footer-social">
+        <a href="mailto:bimasaktiawannn@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        <a href="https://www.instagram.com/bvandia" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.tiktok.com/@bvandia.science" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+        <a href="https://www.linkedin.com/in/bima-saktiawan-502875352" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      </div>
+      
+<!-- Visitor Counter -->
+<div class="visitor-counter">
+  <span class="counter-label">
+    <i class="fas fa-eye"></i> Total Kunjungan
+  </span>
+  <img 
+    src="https://hits.sh/bvandia-science-journey.netlify.app.svg?style=flat-square&color=f2a900&labelColor=0a0a0a&label=%20" 
+    alt="visitor counter"
+    class="counter-badge"
+  />
+</div>
+      
+      <p class="footer-copy">© 2026 Bvandia Science Journey · Built with curiosity</p>
+    </div>
+  </footer>
+
+  <!-- ========== SCRIPTS ========== -->
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <script>
+    // ── READING PROGRESS BAR
+    window.addEventListener('scroll', () => {
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      document.getElementById('reading-progress').style.width = ((scrollTop / scrollHeight) * 100) + '%';
+    });
+
+    // ── READING TIME
+    document.addEventListener('DOMContentLoaded', () => {
+      const prose = document.getElementById('article-prose');
+      if (prose) {
+        const words = prose.innerText.trim().split(/\s+/).length;
+        document.getElementById('reading-time').textContent = Math.ceil(words / 200);
+      }
+    });
+
+    // ── AUTO GENERATE TOC
+    document.addEventListener('DOMContentLoaded', () => {
+      const headings = document.querySelectorAll('.prose h2');
+      const tocList = document.getElementById('toc-list');
+      if (!tocList) return;
+
+      headings.forEach(h => {
+        if (!h.id) {
+          h.id = h.textContent.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+        }
+        const li = document.createElement('li');
+        li.innerHTML = `<a href="#${h.id}">${h.textContent}</a>`;
+        tocList.appendChild(li);
+      });
+
+      // TOC active highlight on scroll
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          const id = entry.target.getAttribute('id');
+          const link = tocList.querySelector(`a[href="#${id}"]`);
+          if (link) link.classList.toggle('active', entry.isIntersecting);
+        });
+      }, { rootMargin: '-20% 0% -70% 0%' });
+
+      headings.forEach(h => observer.observe(h));
+    });
+
+    // ── SCROLL REVEAL
+    document.addEventListener('DOMContentLoaded', () => {
+      const reveals = document.querySelectorAll('.reveal');
+      const revealObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      reveals.forEach(el => revealObserver.observe(el));
+    });
+
+    // ── HAMBURGER MENU
+    document.getElementById('hamburger')?.addEventListener('click', () => {
+      document.getElementById('main-nav').classList.toggle('open');
+    });
+
+    // ── EMAILJS INIT
+    emailjs.init('iBzBlCz0Yz5iIT_gW');
+
+    // ── TOAST HELPER
+    function showToast(icon, message) {
+      let toast = document.getElementById('feedback-toast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'feedback-toast';
+        toast.className = 'feedback-toast';
+        document.body.appendChild(toast);
+      }
+      toast.innerHTML = `<i class="${icon}"></i> ${message}`;
+      toast.classList.add('show');
+      clearTimeout(toast._timer);
+      toast._timer = setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+    // ── REACTION BUTTONS
+    let reactionSent = false;
+    document.querySelectorAll('.reaction-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        if (reactionSent) return;
+        reactionSent = true;
+
+        const response = btn.dataset.response;
+        const labels = { menyala: '🔥 Menyala', informatif: '🧠 Informatif', kurang: '😑 Kurang' };
+
+        document.querySelectorAll('.reaction-btn').forEach(b => {
+          b.classList.toggle('active', b === btn);
+          b.classList.toggle('disabled', b !== btn);
+        });
+
+        showToast('fas fa-paper-plane', 'Mengirim feedback...');
+
+        try {
+          await emailjs.send('service_26uhlsy', 'template_dowhmdr', {
+            article_title: document.title,
+            reader_response: labels[response] || response,
+            page_url: window.location.href,
+            time: new Date().toLocaleString('id-ID', { dateStyle: 'full', timeStyle: 'short' })
+          });
+          showToast('fas fa-check-circle', `Terima kasih! Kamu memilih "${labels[response] || response}"`);
+        } catch (err) {
+          showToast('fas fa-heart', `Feedback "${labels[response] || response}" tercatat!`);
+          console.warn('EmailJS error:', err);
+        }
+      });
+    });
+
+    // ── SHARE BUTTON
+    document.getElementById('share-btn')?.addEventListener('click', () => {
+      if (navigator.share) {
+        navigator.share({
+          title: document.title,
+          text: 'Aku baru membaca tulisan ini, mungkin kamu juga tertarik.',
+          url: window.location.href
+        });
+      } else {
+        const url = encodeURIComponent(window.location.href);
+        const text = encodeURIComponent('Aku baru membaca tulisan ini:');
+        window.open(`https://wa.me/?text=${text}%20${url}`, '_blank');
+      }
+    });
+
+    // ── AUTO ACTIVE NAV
+    document.addEventListener('DOMContentLoaded', () => {
+      const currentPage = location.pathname.split('/').pop() || 'index.html';
+      document.querySelectorAll('nav a').forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === currentPage);
+      });
+    });
+  </script>
+<script src="transition.js"></script>
+</body>
+</html>

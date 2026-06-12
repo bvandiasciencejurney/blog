@@ -24,17 +24,20 @@
       --accent: #f2a900;
     }
 
-    body {  
-      font-family: 'Georgia', serif;  
-      margin: 0;  
-      padding: 0;  
-      background-color: var(--bg);  
-      color: var(--text);  
-      line-height: 1.6;  
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      overflow-x: hidden;
-    }  
+body {  
+  font-family: 'Georgia', serif;  
+  margin: 0;  
+  padding: 0;  
+  background: radial-gradient(circle at 85% 20%, rgba(242, 169, 0, 0.06), transparent 35%),
+radial-gradient(circle at 15% 80%, rgba(242, 169, 0, 0.04), transparent 40%),
+#fafafa;  
+  color: var(--text);  
+  line-height: 1.6;  
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
 
     /* ===== Header ===== */
 .logo-title-wrapper {
@@ -204,23 +207,37 @@ header:hover .science-icon {
       margin-bottom: 1.5rem;
     }
 
-    .social-links {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem;
-      margin-bottom: 2rem;
-    }
+.social-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Bikin kotak otomatis responsif */
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
 
-    .social-links a {
-      text-decoration: none;
-      color: #222;
-      border: 1px solid #ddd;
-      padding: 0.6rem 1rem;
-      border-radius: 8px;
-      background: #fafafa;
-      transition: all 0.3s ease;
-    }
+.social-links a {
+  display: flex;
+  flex-direction: column; /* Ikon di atas, teks di bawah */
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #333;
+  border: 2px solid #eee;
+  padding: 1.8rem 1rem;
+  border-radius: 16px; /* Sudut lebih melengkung modern */
+  background: #ffffff;
+  font-weight: bold;
+  font-size: 1.05rem;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Efek membal yang halus */
+  box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+}
+
+/* Memperbesar ukuran ikon di dalam kartu */
+.social-links a i {
+  font-size: 2.2rem;
+  margin-bottom: 0.8rem;
+  transition: transform 0.3s ease;
+}
+
 
     .social-links a:hover {
       background-color: #f2a900;
@@ -311,6 +328,59 @@ header:hover .science-icon {
         align-items: center;
       }
     }
+    /* GMAIL */
+.social-links a:nth-child(1):hover {
+  color: #db4437;
+  border-color: #db4437;
+  box-shadow: 0 10px 25px rgba(219, 68, 55, 0.25);
+}
+/* INSTAGRAM */
+.social-links a:nth-child(2):hover {
+  color: #e1306c;
+  border-color: #e1306c;
+  box-shadow: 0 10px 25px rgba(225, 48, 108, 0.25);
+}
+/* TIKTOK */
+.social-links a:nth-child(3):hover {
+  color: #010101;
+  border-color: #010101;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+/* LINKEDIN */
+.social-links a:nth-child(4):hover {
+  color: #0077b5;
+  border-color: #0077b5;
+  box-shadow: 0 10px 25px rgba(0, 119, 181, 0.25);
+}
+
+/* Efek ikon sedikit mengangkat saat di-hover */
+.social-links a:hover i {
+  transform: translateY(-5px) scale(1.1);
+}
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.contact-container {
+  max-width: 700px;
+  margin: 4rem auto; /* Sedikit ditambah margin atasnya */
+  padding: 2.5rem;
+  background: white;
+  border-radius: 20px; /* Bikin lengkungan sudut lebih smooth */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05); /* Bayangan lebih halus & elegan */
+  
+  /* Jalankan animasi */
+  animation: fadeInUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+
   </style>
 </head>
 <body>
@@ -333,9 +403,9 @@ header:hover .science-icon {
 
   <nav>
     <a href="index.html"><strong>Home</strong></a>
-    <a href="artikel.html"><strong>Artikel</strong></a>
+    <a href="artikel.html"><strong>Articles</strong></a>
     <a href="about.html"><strong>About</strong></a>
-    <a href="kontak.html" class="active"><strong>Kontak</strong></a>
+    <a href="kontak.html" class="active"><strong>Contact</strong></a>
   </nav>
 
   <section class="contact-container">
@@ -394,5 +464,6 @@ Exploring science, ideas, and reflections about the world.
     });
   });
 </script>
+<script src="transition.js"></script>
 </body>
 </html>

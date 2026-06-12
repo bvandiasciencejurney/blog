@@ -282,27 +282,220 @@ header:hover .science-icon {
       padding-bottom: 3px;
     }  
   
-    /* 🔹 Hero section */  
-    .hero {  
-      text-align: center;  
-      background-color: #f1f0ee;  
-      padding: 2rem 1rem;  
-      border-bottom: 1px solid #ddd;  
-    }  
-  
-    .hero h2 {  
-      font-size: 1.8rem;  
-      color: #222;  
-      margin-bottom: 0.5rem;  
-    }  
-  
-    .hero p {  
-      font-style: italic;  
-      color: #555;  
-      font-size: 1.1rem;  
-      max-width: 700px;  
-      margin: 0 auto;  
-    }  
+    /* 🔹 Hero section */
+    .hero {
+      text-align: center;
+      background-color: #f1f0ee;
+      padding: 2.5rem 1.5rem 2rem;
+      border-bottom: 1px solid #ddd;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* dot grid tipis */
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(242,169,0,0.15) 1px, transparent 1px);
+      background-size: 26px 26px;
+      pointer-events: none;
+    }
+
+    .hero-inner { position: relative; z-index: 1; }
+
+    .hero h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(1.8rem, 5vw, 2.6rem);
+      font-weight: 900;
+      color: #222;
+      margin-bottom: 0.5rem;
+      letter-spacing: -1px;
+    }
+
+    .hero h2 span { color: var(--accent); }
+
+    .hero-typewriter {
+      font-style: italic;
+      color: #555;
+      font-size: 1rem;
+      max-width: 600px;
+      margin: 0 auto 1.6rem;
+      min-height: 1.5em;
+    }
+    .hero-typewriter::after {
+      content: '|';
+      animation: blink .7s step-end infinite;
+      color: var(--accent);
+      font-style: normal;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* stats */
+    .hero-stats {
+      display: inline-flex;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.08);
+      background: white;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+      margin-bottom: 1.4rem;
+    }
+    .hero-stat {
+      padding: 0.6rem 1.4rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #888;
+      border-right: 1px solid rgba(0,0,0,0.07);
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+    }
+    .hero-stat:last-child { border-right: none; }
+    .hero-stat strong {
+      font-size: 1.2rem;
+      font-weight: 900;
+      color: #111;
+      letter-spacing: -0.5px;
+      display: block;
+    }
+
+    /* tombol acak */
+    .btn-random {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #0a0a0a; color: white;
+      border: none; border-radius: 50px;
+      padding: 0.65rem 1.5rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.82rem; font-weight: 900;
+      text-transform: uppercase; letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: background 0.25s, transform 0.25s;
+    }
+    .btn-random i { color: var(--accent); }
+    .btn-random:hover {
+      background: var(--accent); color: #0a0a0a;
+      transform: translateY(-2px);
+    }
+    .btn-random:hover i { color: #0a0a0a; }
+
+    @media (max-width: 480px) {
+      .hero { padding: 2rem 1rem 1.6rem; }
+      .hero-stats { flex-wrap: wrap; }
+      .hero-stat { padding: 0.5rem 1rem; }
+    }
+      /* ===== FILTER BAR ===== */
+  .filter-section {
+    max-width: 1200px;
+    margin: 2.5rem auto 0;
+    padding: 0 1.5rem;
+  }
+  .filter-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #aaa;
+    margin-bottom: 0.8rem;
+  }
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .filter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 16px;
+    border-radius: 50px;
+    border: 2px solid #e0e0e0;
+    background: white;
+    color: #555;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-family: 'Georgia', serif;
+  }
+  .filter-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(242,169,0,0.15);
+  }
+  .filter-btn.active {
+    background: var(--dark);
+    border-color: var(--dark);
+    color: white;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  }
+  .filter-btn.active .btn-dot { background: var(--accent); }
+  .btn-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.6;
+    transition: background 0.2s;
+  }
+
+  /* Warna dot per kategori */
+  .filter-btn[data-cat="psikologi"] .btn-dot { background: #f2a900; }
+  .filter-btn[data-cat="sains"] .btn-dot { background: #2980b9; }
+  .filter-btn[data-cat="opini"] .btn-dot { background: #27ae60; }
+  .filter-btn[data-cat="sospol"] .btn-dot { background: #c0392b; }
+  .filter-btn[data-cat="ekonomi"] .btn-dot { background: #7f8c8d; }
+  .filter-btn[data-cat="sosbud"] .btn-dot { background: #a0522d; }
+  .filter-btn[data-cat="sejarah"] .btn-dot { background: #192a56; }
+  .filter-btn[data-cat="teknologi"] .btn-dot { background: #6c3dc7; }
+  .filter-btn[data-cat="filsafat"] .btn-dot { background: #2d6a4f; }
+
+  /* ===== ARTICLE COUNT ===== */
+  .article-count {
+    max-width: 1200px;
+    margin: 1.2rem auto 0;
+    padding: 0 1.5rem;
+    font-size: 0.88rem;
+    color: #999;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    min-height: 1.4rem;
+  }
+  .article-count span {
+    color: var(--accent);
+  }
+
+  /* ===== SECTION TITLE ===== */
+  .section-title {
+    text-align: center;
+    margin-top: 3rem;
+    font-size: 1.5rem;
+    color: #333;
+    position: relative;
+  }
+  .section-title::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 3px;
+    background-color: #f2a900;
+    margin: 0.8rem auto 2rem auto;
+    border-radius: 2px;
+  }
+
+  /* ===== GRID ARTIKEL ===== */
+  .articles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+    max-width: 1200px;
+    margin: 2rem auto 4rem;
+    padding: 0 1.5rem;
+  }
   
     /* 🔹 Bagian judul artikel */  
     .section-title {  
@@ -473,6 +666,18 @@ header:hover .science-icon {
   border: 1px solid rgba(25, 42, 86, 0.25);
 }
 
+/* Teknologi - Ungu */
+.category-badge.teknologi { 
+  background: rgba(108, 61, 199, 0.1); 
+  color: #6c3dc7; 
+}
+
+/* Filsafat - Hijau Tua */
+.category-badge.filsafat { 
+  background: rgba(45, 106, 79, 0.1); 
+  color: #2d6a4f; 
+}
+
 /* 🔹 Link 'Read More' Minimalis */
 .read-more {  
   margin-top: auto;
@@ -559,27 +764,174 @@ header:hover .science-icon {
       }
     }
     }  
-  </style>  
   
-  <script>  
-    document.addEventListener("DOMContentLoaded", () => {  
-      const currentPage = location.pathname.split("/").pop();  
-      const links = document.querySelectorAll("nav a");  
-      links.forEach(link => {  
-        if (link.getAttribute("href") === currentPage) {  
-          link.classList.add("active");  
-        }  
-      });  
+  /* ===== FILTER BAR ===== */
+  .filter-section {
+    max-width: 1200px;
+    margin: 2.5rem auto 0;
+    padding: 0 1.5rem;
+  }
+  .filter-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #aaa;
+    margin-bottom: 0.8rem;
+  }
+  .filter-bar { display: flex; flex-wrap: wrap; gap: 10px; }
+  .filter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 16px;
+    border-radius: 50px;
+    border: 2px solid #e0e0e0;
+    background: white;
+    color: #555;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-family: 'Georgia', serif;
+  }
+  .filter-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(242,169,0,0.15);
+  }
+  .filter-btn.active {
+    background: var(--dark);
+    border-color: var(--dark);
+    color: white;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  }
+  .filter-btn.active .btn-dot { background: var(--accent); }
+  .btn-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: currentColor; opacity: 0.6; transition: background 0.2s;
+  }
+  .filter-btn[data-cat="psikologi"] .btn-dot { background: #f2a900; }
+  .filter-btn[data-cat="sains"]     .btn-dot { background: #2980b9; }
+  .filter-btn[data-cat="opini"]     .btn-dot { background: #27ae60; }
+  .filter-btn[data-cat="sospol"]    .btn-dot { background: #c0392b; }
+  .filter-btn[data-cat="ekonomi"]   .btn-dot { background: #7f8c8d; }
+  .filter-btn[data-cat="sosbud"]    .btn-dot { background: #a0522d; }
+  .filter-btn[data-cat="sejarah"]   .btn-dot { background: #192a56; }
+
+  /* ===== ARTICLE COUNT ===== */
+  .article-count {
+    max-width: 1200px; margin: 1.2rem auto 0; padding: 0 1.5rem;
+    font-size: 0.88rem; color: #999;
+    font-family: 'Montserrat', sans-serif; font-weight: 700; min-height: 1.4rem;
+  }
+  .article-count span { color: var(--accent); }
+
+  /* ===== CARD SYSTEM ===== */
+  .articles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+    max-width: 1200px;
+    margin: 2rem auto 4rem;
+    padding: 0 1.5rem;
+    /* reset animasi lama hapus.html */
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .article-card {
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border: 1px solid rgba(0,0,0,0.03);
+    animation: cardIn 0.4s ease forwards;
+    padding: 0;
+  }
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .article-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    border-color: var(--accent);
+  }
+  .article-card.hidden { display: none; }
+  .article-card img {
+    width: 100%; height: 220px; object-fit: cover;
+    display: block; border-radius: 0;
+    transition: transform 0.6s ease;
+  }
+  .article-card:hover img { transform: scale(1.1); }
+  .article-content {
+    padding: 2rem; flex-grow: 1;
+    display: flex; flex-direction: column;
+  }
+  .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+  .category-badge {
+    display: inline-block; padding: 4px 12px; border-radius: 50px;
+    font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+    width: fit-content; cursor: pointer; transition: filter 0.2s;
+  }
+  .category-badge:hover { filter: brightness(0.85); }
+  .category-badge.psikologi { background: rgba(242,169,0,0.1); color: #f2a900; }
+  .category-badge.sains     { background: rgba(52,152,219,0.1); color: #2980b9; }
+  .category-badge.opini     { background: rgba(39,174,96,0.1);  color: #27ae60; }
+  .category-badge.sospol    { background: rgba(192,57,43,0.1);  color: #c0392b; }
+  .category-badge.ekonomi   { background: rgba(127,140,141,0.1);color: #7f8c8d; }
+  .category-badge.sosbud    { background: rgba(160,82,45,0.1);  color: #a0522d; }
+  .category-badge.sejarah   { background: rgba(25,42,86,0.12);  color: #192a56; border: 1px solid rgba(25,42,86,0.25); }
+  .article-date { font-size: 0.8rem; color: #aaa; margin-bottom: 0.5rem; }
+  .article-content h3 {
+    margin: 0.5rem 0 1rem 0; color: var(--dark);
+    font-size: 1.4rem; font-family: 'Montserrat', sans-serif;
+    font-weight: 800; line-height: 1.4; transition: color 0.3s ease;
+  }
+  .article-card:hover h3 { color: var(--accent); }
+  .article-content p {
+    color: #666; font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.5rem;
+    display: -webkit-box; -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .read-more {
+    margin-top: auto; font-weight: 700; color: var(--dark);
+    text-decoration: none; display: flex; align-items: center;
+    gap: 8px; transition: gap 0.3s ease; width: fit-content;
+  }
+  .read-more::after { content: '→'; color: var(--accent); font-size: 1.2rem; }
+  .read-more:hover { color: var(--accent); gap: 12px; }
+
+  /* ===== EMPTY STATE ===== */
+  .empty-state {
+    display: none; text-align: center;
+    padding: 4rem 1rem; grid-column: 1 / -1;
+  }
+  .empty-state.show { display: block; }
+  .empty-state i { font-size: 3rem; color: #ddd; margin-bottom: 1rem; display: block; }
+  .empty-state p { color: #aaa; font-size: 1rem; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 480px) {
+    .articles { grid-template-columns: 1fr; gap: 1.5rem; padding: 0 1rem; }
+    .article-card img { height: 180px; }
+    .article-content { padding: 1.2rem; }
+    .article-content h3 { font-size: 1.15rem; }
+    .article-content p { font-size: 0.88rem; }
+    .filter-bar { gap: 8px; }
+    .filter-btn { font-size: 0.76rem; padding: 6px 12px; }
+  }
+</style>  
   
-      const articles = document.querySelector(".articles");  
-      const footer = document.querySelector("footer");  
-      setTimeout(() => {  
-        articles.classList.add("visible");  
-        footer.classList.add("visible");  
-      }, 400);  
-    });  
-  </script>  
-</head>  
+  </head>  
   
 <body>  
 <header>  
@@ -601,105 +953,182 @@ header:hover .science-icon {
   
   <nav> 
     <a href="index.html" > <strong> Home </strong> </a>  
-    <a href="artikel.html" class="active"  > <strong> Artikel</strong> </a>  
+    <a href="artikel.html" class="active"  > <strong> Articles</strong> </a>  
     <a href="about.html"> <strong> About </strong> </a>  
-    <a href="kontak.html"> <strong>  Kontak </strong>  </a>  
+    <a href="kontak.html"> <strong> Contact </strong>  </a>  
   </nav>  
   
-  <section class="hero">  
-    <h2>Masyarakat Baru</h2>  
-    <p>Tempat semua Yappingan gw berada. so guys, kalo kalian liat gw jarang ngoceh bukannya gw kalem, tapi gw punya platformnya ajaa hehe...</p>  
-  </section>  
-  
+  <section class="hero">
+    <div class="hero-inner">
+      <h2>Masyarakat <span>Baru</span></h2>
+      <p class="hero-typewriter" id="heroTypewriter"></p>
+
+      <div class="hero-stats">
+        <div class="hero-stat"><strong id="statCount">9</strong>Artikel</div>
+        <div class="hero-stat"><strong>9</strong>Kategori</div>
+        <div class="hero-stat"><strong>2025</strong>Sejak</div>
+      </div>
+
+      <br>
+      <button class="btn-random" id="btnRandom">
+        <i class="fas fa-shuffle"></i> Baca Artikel Acak
+      </button>
+    </div>
+  </section>
+  <!-- ===== FILTER BAR ===== -->
+<div class="filter-section">
+  <div class="filter-label">Filter Kategori</div>
+  <div class="filter-bar" id="filterBar">
+    <button class="filter-btn active" data-cat="semua"><span class="btn-dot"></span> Semua</button>
+    <button class="filter-btn" data-cat="psikologi"><span class="btn-dot"></span> Psikologi</button>
+    <button class="filter-btn" data-cat="sains"><span class="btn-dot"></span> Sains</button>
+    <button class="filter-btn" data-cat="opini"><span class="btn-dot"></span> Opini</button>
+    <button class="filter-btn" data-cat="sospol"><span class="btn-dot"></span> Sosial-Politik</button>
+    <button class="filter-btn" data-cat="ekonomi"><span class="btn-dot"></span> Ekonomi</button>
+    <button class="filter-btn" data-cat="sosbud"><span class="btn-dot"></span> Sosial-Budaya</button>
+    <button class="filter-btn" data-cat="sejarah"><span class="btn-dot"></span> Sejarah</button>
+    <button class="filter-btn" data-cat="teknologi"><span class="btn-dot"></span> Teknologi</button>
+    <button class="filter-btn" data-cat="filsafat"><span class="btn-dot"></span> Filsafat</button>
+  </div>
+</div>
+<div class="article-count" id="articleCount"></div>
+
   <h2 class="section-title">Tulisan Terbaru</h2>  
   
-  <section class="articles">  
-  
-          <div class="article-card">  
-      <img src="https://cdn.theatlantic.com/thumbor/u6qUcZBKf0f1vkof8iunjC7wb1k=/0x0:2880x1620/750x422/media/img/2025/04/29/2025_04_world_order_ben_jones/original.jpg" alt="Dunia">  
-      <div class="article-content"> 
-<span class="category-badge sospol">Sosial-Politik</span>
-<span class="category-badge sejarah">sejarah</span></span>
-        <div class="article-date">10 Maret 2026</div>  
-        <h3>Dunia Yang Tidak Lagi Hitam dan Putih</h3>  
-        <p>Melihat bagaimana kompleksnya geopolitk Gelobal khusunya dalam kaca mata Hubungan Internasional.</p>  
-        <a href="duniahitamputih.html" class="read-more">Baca Selengkapnya</a>  
-      </div>  
-      </div>
-  
-        <div class="article-card">  
-      <img src="https://cdn.oase.id/dynamic/2023/07/19/3376/CpVR7OQBqk.jpeg?w=500" alt="al-khwarizmi">  
-      <div class="article-content"> 
-<span class="category-badge sosbud">Sosial-Budaya</span>
-<span class="category-badge sejarah">sejarah</span></span>
-        <div class="article-date">3 Maret 2026</div>  
-        <h3>Muhammad ibn Musa al-Khwarizmi</h3>  
-        <p>Kisah seorang tokoh Islam paling berpenganguruh khusunya dibidang matematika, karyanya yang menjadi dasar komputasi Modern</p>  
-        <a href="al-khwarizmi.html" class="read-more">Baca Selengkapnya</a>  
-      </div>  
-      </div>
-  
-        <div class="article-card">  
-      <img src="pasar.png" alt="Pasar Puraseda">  
-      <div class="article-content"> 
-<span class="category-badge sosbud">Sosial-Budaya</span>
-<span class="category-badge opini">Opini</span>
-<span class="category-badge ekonomi">Ekonomi</span>
-        <div class="article-date">25 Februari 2026</div>  
-        <h3>Ekonom Pasar</h3>  
-        <p>Bagaimana pasar mampu menajadi representasi dari ekonomi alami??</p>  
-        <a href="ekonompasar.html" class="read-more">Baca Selengkapnya</a>  
-      </div>  
-      </div>
-  
-      <div class="article-card">  
-      <img src="cringe.jpg" alt="meme fomo">  
-      <div class="article-content"> 
-<span class="category-badge sosbud">Sosial-Budaya</span>
-<span class="category-badge opini">Opini</span>
-        <div class="article-date">8 Februari 2026</div>  
-        <h3>The Reason Why: It’s Okay to be "Alay"</h3>  
-        <p>Sedikit keritikan terhadap dinamika sosial pada remaja, yang punya dampak konstrutif pada autentika seseorang.</p>  
-        <a href="itsokeytobealay.html" class="read-more">Baca Selengkapnya</a>  
-      </div>  
-      </div>
-  
-      <div class="article-card">  
-      <img src="seninpagikesekian.jpg" alt="Pilosofi Senin Pagi">  
-      <div class="article-content"> 
-<span class="category-badge psikologi">psikologi</span>
-        <div class="article-date">1 Januari 2026</div>  
-        <h3>Senin Pagi Kesekian: Dibawah terik sinar matahari yang membakar kulit, disitu pun egoku ikut terbakar.</h3>  
-        <p>Seringkali kita terjebak dalam rutinitas yang terasa mekanis hingga kehilangan arah. Lewat lensa psikologi <em>Viktor Frankl,</em> artikel ini mengulas bagaimana keberanian sejati bukan terletak pada ambisi besar, melainkan pada kesetiaan kita dalam memeluk kenyataan dan menjalankan tanggung jawab di setiap peran yang kita jalankan.</p>  
-        <a href="seninkesekian.html" class="read-more">Baca Selengkapnya</a>  
-      </div>  
-      </div>
+  <section class="articles" id="articleGrid">
 
-      <div class="article-card">  
-      <img src="linguistik.jpg" alt="Seni Mengumpat">  
-      <div class="article-content">  
-<span class="category-badge sosbud">Sosial-Budaya</span>
-<span class="category-badge psikologi">psikologi</span>
-        <div class="article-date">19 Desember 2025</div>  
-        <h3>Seni Mengumpat: Mengapa Kita Memaki? Mengapa Makian Justru Menjadi Perekat Persahabatan?</h3>  
-        <p>Pernahkah kamu merasa lega setelah mengumpat? Ternyata, kata kasar bukan sekadar sampah bahasa. Dari ledakan hormon di otak hingga simbol solidaritas, mari bedah anatomi di balik 'pedasnya' lidah kita lewat sudut pandang psikologi dan sosiologi.</p>  
-        <a href="senimengumpat.html" class="read-more">Baca Selengkapnya</a>  
-      </div>  
+  <div class="article-card" data-categories="filsafat">
+    <img src="keepingtheemberalive.png" alt="Keeping the Ember Alive">
+    <div class="article-content">
+      <div class="badges">
+        <span class="category-badge filsafat" data-filter="filsafat">Filsafat</span>
+        <span class="category-badge" style="background:rgba(45,106,79,0.08);color:#2d6a4f;" data-filter="filsafat">Kontemporer</span>
       </div>
-  
-    <div class="article-card">  
-      <img src="analysisparalysis.jpg" alt="Ilustrasi Artikel 3">  
-      <div class="article-content">
-<span class="category-badge psikologi">psikologi</span>
-        <div class="article-date">20 November 2025</div>  
-        <h3>“Berpikir Terlalu Lama, Hidup Terlalu Singkat” Tentang Analysis Paralysis di Zaman Digital</h3>  
-        <p>Pembahasan tentang apa itu analysis paralysis, dan bagaimana era informasi dan digital memperburuk keadaan</p>  
-        <a href="artikelanalisisparalisis.html" class="read-more">Baca Selengkapnya</a>  
-      </div>  
-      </div>
-  
+      <div class="article-date">12 Juni 2026</div>
+      <h3>Keeping The Ember Alive</h3>
+      <p>Pemuda abad-21 yang menjadi penerus estafet peradaban dengan semangat keberanian dan keyakinannya akan berfikir adalah hal yang mutlak dan tak terbatas, sehingga ia tidak pernah takut untuk terus berfikir dan bertanya untuk mendapatkan secerca cahaya.</p>
+      <a href="keepingtheemberalive.html" class="read-more">Baca Selengkapnya</a>
+    </div>
+  </div>
 
-  </section>  
+  <div class="article-card" data-categories="sains teknologi sejarah">
+    <img src="https://dnjpbxg2wcpr8.cloudfront.net/issue_cover/60104007ace1090010e00499/5d43f591d9e84062ddd5bcbe/60fc2012c350ab7eee05195b/1/cover.webp" alt="The Space Race">
+    <div class="article-content">
+      <div class="badges">
+        <span class="category-badge sains" data-filter="sains">Sains</span>
+        <span class="category-badge teknologi" data-filter="teknologi">Teknologi</span>
+        <span class="category-badge sejarah" data-filter="sejarah">Sejarah</span>
+      </div>
+      <div class="article-date">5 Mei 2026</div>
+      <h3>The Space Race</h3>
+      <p>Kisah lengkap persaingan Amerika Serikat dan Uni Soviet dalam menaklukkan ruang angkasa—dari Sputnik hingga pendaratan di Bulan—di tengah ketegangan Perang Dingin.</p>
+      <a href="spacerace.html" class="read-more">Baca Selengkapnya</a>
+    </div>
+  </div>
+
+  <div class="article-card" data-categories="sospol sejarah">
+    <img src="https://cdn.theatlantic.com/thumbor/u6qUcZBKf0f1vkof8iunjC7wb1k=/0x0:2880x1620/750x422/media/img/2025/04/29/2025_04_world_order_ben_jones/original.jpg" alt="Dunia">
+    <div class="article-content">
+      <div class="badges">
+        <span class="category-badge sospol" data-filter="sospol">Sosial-Politik</span>
+        <span class="category-badge sejarah" data-filter="sejarah">Sejarah</span>
+      </div>
+      <div class="article-date">10 Maret 2026</div>
+      <h3>Dunia Yang Tidak Lagi Hitam dan Putih</h3>
+      <p>Melihat bagaimana kompleksnya geopolitik global khususnya dalam kaca mata Hubungan Internasional.</p>
+      <a href="duniahitamputih.html" class="read-more">Baca Selengkapnya</a>
+    </div>
+  </div>
+
+  <div class="article-card" data-categories="sosbud sejarah">
+    <img src="https://cdn.oase.id/dynamic/2023/07/19/3376/CpVR7OQBqk.jpeg?w=500" alt="al-khwarizmi">
+    <div class="article-content">
+      <div class="badges">
+        <span class="category-badge sosbud" data-filter="sosbud">Sosial-Budaya</span>
+        <span class="category-badge sejarah" data-filter="sejarah">Sejarah</span>
+      </div>
+      <div class="article-date">3 Maret 2026</div>
+      <h3>Muhammad ibn Musa al-Khwarizmi</h3>
+      <p>Kisah seorang tokoh Islam paling berpengaruh khususnya di bidang matematika, karyanya yang menjadi dasar komputasi modern.</p>
+      <a href="al-khwarizmi.html" class="read-more">Baca Selengkapnya</a>
+    </div>
+  </div>
+
+  <div class="article-card" data-categories="sosbud opini ekonomi">
+    <img src="pasar.png" alt="Pasar Puraseda">
+    <div class="article-content">
+      <div class="badges">
+        <span class="category-badge sosbud" data-filter="sosbud">Sosial-Budaya</span>
+        <span class="category-badge opini" data-filter="opini">Opini</span>
+        <span class="category-badge ekonomi" data-filter="ekonomi">Ekonomi</span>
+      </div>
+      <div class="article-date">25 Februari 2026</div>
+      <h3>Ekonom Pasar</h3>
+      <p>Bagaimana pasar mampu menjadi representasi dari ekonomi alami?</p>
+      <a href="ekonompasar.html" class="read-more">Baca Selengkapnya</a>
+    </div>
+  </div>
+
+  <div class="article-card" data-categories="sosbud opini">
+    <img src="cringe.jpg" alt="meme fomo">
+    <div class="article-content">
+      <div class="badges">
+        <span class="category-badge sosbud" data-filter="sosbud">Sosial-Budaya</span>
+        <span class="category-badge opini" data-filter="opini">Opini</span>
+      </div>
+      <div class="article-date">8 Februari 2026</div>
+      <h3>The Reason Why: It's Okay to be "Alay"</h3>
+      <p>Sedikit kritikan terhadap dinamika sosial pada remaja, yang punya dampak konstruktif pada autentisitas seseorang.</p>
+      <a href="itsokeytobealay.html" class="read-more">Baca Selengkapnya</a>
+    </div>
+  </div>
+
+  <div class="article-card" data-categories="psikologi">
+    <img src="seninpagikesekian.jpg" alt="Pilosofi Senin Pagi">
+    <div class="article-content">
+      <div class="badges">
+        <span class="category-badge psikologi" data-filter="psikologi">Psikologi</span>
+      </div>
+      <div class="article-date">1 Januari 2026</div>
+      <h3>Senin Pagi Kesekian: Dibawah terik sinar matahari yang membakar kulit, disitu pun egoku ikut terbakar.</h3>
+      <p>Seringkali kita terjebak dalam rutinitas yang terasa mekanis hingga kehilangan arah. Lewat lensa psikologi Viktor Frankl, artikel ini mengulas bagaimana keberanian sejati bukan terletak pada ambisi besar, melainkan pada kesetiaan kita dalam memeluk kenyataan.</p>
+      <a href="seninkesekian.html" class="read-more">Baca Selengkapnya</a>
+    </div>
+  </div>
+
+  <div class="article-card" data-categories="sosbud psikologi">
+    <img src="linguistik.jpg" alt="Seni Mengumpat">
+    <div class="article-content">
+      <div class="badges">
+        <span class="category-badge sosbud" data-filter="sosbud">Sosial-Budaya</span>
+        <span class="category-badge psikologi" data-filter="psikologi">Psikologi</span>
+      </div>
+      <div class="article-date">19 Desember 2025</div>
+      <h3>Seni Mengumpat: Mengapa Kita Memaki? Mengapa Makian Justru Menjadi Perekat Persahabatan?</h3>
+      <p>Pernahkah kamu merasa lega setelah mengumpat? Ternyata, kata kasar bukan sekadar sampah bahasa. Dari ledakan hormon di otak hingga simbol solidaritas, mari bedah anatomi di balik 'pedasnya' lidah kita.</p>
+      <a href="senimengumpat.html" class="read-more">Baca Selengkapnya</a>
+    </div>
+  </div>
+
+  <div class="article-card" data-categories="psikologi">
+    <img src="analysisparalysis.jpg" alt="Analysis Paralysis">
+    <div class="article-content">
+      <div class="badges">
+        <span class="category-badge psikologi" data-filter="psikologi">Psikologi</span>
+      </div>
+      <div class="article-date">20 November 2025</div>
+      <h3>"Berpikir Terlalu Lama, Hidup Terlalu Singkat" Tentang Analysis Paralysis di Zaman Digital</h3>
+      <p>Pembahasan tentang apa itu analysis paralysis, dan bagaimana era informasi dan digital memperburuk keadaan.</p>
+      <a href="artikelanalisisparalisis.html" class="read-more">Baca Selengkapnya</a>
+    </div>
+  </div>
+
+  <div class="empty-state" id="emptyState">
+    <i class="fas fa-search"></i>
+    <p>Belum ada artikel di kategori ini.<br>Nantikan tulisan berikutnya!</p>
+  </div>
+
+</section>  
 
 
 <footer class="site-footer">
@@ -729,21 +1158,106 @@ Exploring science, ideas, and reflections about the world.
   </p>
   <p><p>Built with curiosity</p>
 </footer>
-  <script>
-      function notif(platform) {alert("kamu akan diarahkan ke " + platform);}
-  </script>
   
-  <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const currentPage = location.pathname.split("/").pop() || "index.html";
-    const links = document.querySelectorAll("nav a");
-    links.forEach(link => {
-      if (link.getAttribute("href") === currentPage) {
-        link.classList.add("active");
-      }
-    });
+
+<script>
+  /* === TYPEWRITER === */
+  const phrases = [
+    "Tempat semua yappingan gw berada.",
+    "so guys, kalo liat gw kalem, gw punya platformnya aja hehe...",
+    "Sains, Filsafat, dan semua hal yang bikin penasaran.",
+    "Tulis dulu, sempurnain nanti."
+  ];
+  let pi = 0, ci = 0, deleting = false;
+  const tw = document.getElementById('heroTypewriter');
+  function typeLoop() {
+    const full = phrases[pi];
+    if (!deleting) {
+      tw.textContent = full.slice(0, ci++);
+      if (ci > full.length) { deleting = true; setTimeout(typeLoop, 1800); return; }
+      setTimeout(typeLoop, 55);
+    } else {
+      tw.textContent = full.slice(0, ci--);
+      if (ci < 0) { deleting = false; pi = (pi + 1) % phrases.length; setTimeout(typeLoop, 350); return; }
+      setTimeout(typeLoop, 28);
+    }
+  }
+  typeLoop();
+
+  /* === TOMBOL ACAK === */
+  const articleLinks = [
+    'keepingtheemberalive.html','spacerace.html','duniahitamputih.html',
+    'al-khwarizmi.html','ekonompasar.html','itsokeytobealay.html',
+    'seninkesekian.html','senimengumpat.html','artikelanalisisparalisis.html'
+  ];
+  document.getElementById('btnRandom').addEventListener('click', () => {
+    window.location.href = articleLinks[Math.floor(Math.random() * articleLinks.length)];
+  });
+
+  /* Update stat count dari jumlah kartu aktual */
+  document.addEventListener('DOMContentLoaded', () => {
+    const total = document.querySelectorAll('.article-card[data-categories]').length;
+    document.getElementById('statCount').textContent = total;
   });
 </script>
 
+<script>
+  // ===== FILTER SYSTEM =====
+  const filterBar  = document.getElementById("filterBar");
+  const cards      = document.querySelectorAll(".article-card[data-categories]");
+  const emptyState = document.getElementById("emptyState");
+  const countEl    = document.getElementById("articleCount");
+
+  function updateCount(visible, total, cat) {
+    if (cat === "semua") {
+      countEl.innerHTML = `Menampilkan <span>${total}</span> artikel`;
+    } else {
+      countEl.innerHTML = `Menampilkan <span>${visible}</span> dari ${total} artikel &mdash; kategori <span>${cat}</span>`;
+    }
+  }
+
+  function filterCards(cat) {
+    let visibleCount = 0;
+    cards.forEach((card) => {
+      const cats = card.dataset.categories.split(" ");
+      const match = cat === "semua" || cats.includes(cat);
+      if (match) {
+        card.classList.remove("hidden");
+        card.style.animationDelay = `${visibleCount * 60}ms`;
+        card.style.animation = "none";
+        card.offsetHeight;
+        card.style.animation = "";
+        visibleCount++;
+      } else {
+        card.classList.add("hidden");
+      }
+    });
+    emptyState.classList.toggle("show", visibleCount === 0);
+    updateCount(visibleCount, cards.length, cat);
+  }
+
+  document.querySelectorAll(".category-badge[data-filter]").forEach(badge => {
+    badge.addEventListener("click", (e) => {
+      e.preventDefault();
+      const cat = badge.dataset.filter;
+      document.querySelectorAll(".filter-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.cat === cat);
+      });
+      filterCards(cat);
+      filterBar.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+  });
+
+  filterBar.addEventListener("click", (e) => {
+    const btn = e.target.closest(".filter-btn");
+    if (!btn) return;
+    document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    filterCards(btn.dataset.cat);
+  });
+
+  filterCards("semua");
+</script>
+<script src="transition.js"></script>
 </body>  
 </html>

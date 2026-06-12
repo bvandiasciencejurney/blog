@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — Partikel Tidak Ditemukan | Bvandia Science Journey</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --accent: #f2a900;
+      --text: #c8c8c8;
+      --dim: rgba(242,169,0,0.12);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ── Partikel mengambang di background ── */
+    .particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: 0;
+      animation: drift linear infinite;
+    }
+
+    @keyframes drift {
+      0%   { opacity: 0; transform: translateY(0) scale(0.5); }
+      10%  { opacity: 0.4; }
+      90%  { opacity: 0.15; }
+      100% { opacity: 0; transform: translateY(-100vh) scale(1.2); }
+    }
+
+    /* ── Orbit atom dekoratif ── */
+    .atom-wrap {
+      position: relative;
+      width: 180px;
+      height: 180px;
+      margin-bottom: 2.5rem;
+      z-index: 1;
+    }
+    .nucleus {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 30px rgba(242,169,0,0.7), 0 0 60px rgba(242,169,0,0.3);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 0 30px rgba(242,169,0,0.7), 0 0 60px rgba(242,169,0,0.3); }
+      50%      { box-shadow: 0 0 50px rgba(242,169,0,0.9), 0 0 90px rgba(242,169,0,0.5); }
+    }
+
+    .orbit {
+      position: absolute;
+      top: 50%; left: 50%;
+      border: 1px solid rgba(242,169,0,0.25);
+      border-radius: 50%;
+      transform-origin: center;
+    }
+    .orbit-1 {
+      width: 100px; height: 100px;
+      margin-top: -50px; margin-left: -50px;
+      animation: spin 3s linear infinite;
+    }
+    .orbit-2 {
+      width: 150px; height: 60px;
+      margin-top: -30px; margin-left: -75px;
+      animation: spin 4.5s linear infinite reverse;
+      transform: rotate(60deg);
+    }
+    .orbit-3 {
+      width: 60px; height: 150px;
+      margin-top: -75px; margin-left: -30px;
+      animation: spin 6s linear infinite;
+      transform: rotate(120deg);
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .orbit-2 { animation: spin2 4.5s linear infinite reverse; }
+    .orbit-3 { animation: spin3 6s linear infinite; }
+    @keyframes spin2 {
+      from { transform: rotate(60deg); }
+      to   { transform: rotate(420deg); }
+    }
+    @keyframes spin3 {
+      from { transform: rotate(120deg); }
+      to   { transform: rotate(480deg); }
+    }
+
+    /* Elektron kecil di setiap orbit */
+    .electron {
+      position: absolute;
+      width: 8px; height: 8px;
+      background: #fff;
+      border-radius: 50%;
+      top: -4px; left: 50%;
+      margin-left: -4px;
+      box-shadow: 0 0 8px rgba(255,255,255,0.8);
+    }
+
+    /* ── Angka 404 ── */
+    .error-code {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: clamp(5rem, 18vw, 9rem);
+      line-height: 1;
+      letter-spacing: -4px;
+      background: linear-gradient(to right, #fff 20%, var(--accent) 50%, #fff 80%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: shine 3.5s linear infinite;
+      z-index: 1;
+      position: relative;
+    }
+    @keyframes shine { to { background-position: 200% center; } }
+
+    /* ── Teks utama ── */
+    .main-content {
+      text-align: center;
+      z-index: 1;
+      position: relative;
+      padding: 0 1.5rem;
+      max-width: 560px;
+    }
+
+    .error-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--accent);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin: 1rem 0 0.6rem;
+    }
+
+    .error-desc {
+      font-style: italic;
+      color: #888;
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-bottom: 0.5rem;
+    }
+
+    .error-quote {
+      margin: 1.8rem auto;
+      padding: 1.2rem 1.8rem;
+      border-left: 3px solid var(--accent);
+      background: rgba(242,169,0,0.05);
+      border-radius: 0 12px 12px 0;
+      text-align: left;
+    }
+    .error-quote p {
+      font-style: italic;
+      color: #aaa;
+      font-size: 0.92rem;
+      line-height: 1.7;
+      margin-bottom: 0.4rem;
+    }
+    .error-quote cite {
+      font-size: 0.78rem;
+      color: var(--accent);
+      font-style: normal;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── Tombol ── */
+    .btn-group {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .btn-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--accent);
+      color: #0a0a0a;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.88rem;
+      letter-spacing: 0.5px;
+      padding: 0.8rem 1.8rem;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      box-shadow: 0 4px 20px rgba(242,169,0,0.35);
+    }
+    .btn-home:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(242,169,0,0.5);
+    }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      color: #888;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.88rem;
+      padding: 0.8rem 1.8rem;
+      border-radius: 50px;
+      border: 1px solid rgba(255,255,255,0.1);
+      text-decoration: none;
+      cursor: pointer;
+      transition: color 0.25s, border-color 0.25s;
+    }
+    .btn-back:hover {
+      color: #ccc;
+      border-color: rgba(255,255,255,0.25);
+    }
+
+    /* ── Fun fact bawah ── */
+    .fun-fact-box {
+      margin-top: 1.8rem;
+      padding: 0.9rem 1.4rem;
+      background: rgba(242,169,0,0.07);
+      border: 1px solid rgba(242,169,0,0.2);
+      border-radius: 12px;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7rem;
+      text-align: left;
+    }
+    .fun-fact-box i {
+      color: var(--accent);
+      font-size: 0.9rem;
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+    .fun-fact-box p {
+      font-size: 0.82rem;
+      color: #aaa;
+      line-height: 1.6;
+      font-style: italic;
+      margin: 0;
+    }
+
+    @media (max-width: 480px) {
+      .atom-wrap { width: 130px; height: 130px; }
+      .orbit-1   { width: 72px; height: 72px; margin-top: -36px; margin-left: -36px; }
+      .orbit-2   { width: 110px; height: 44px; margin-top: -22px; margin-left: -55px; }
+      .orbit-3   { width: 44px; height: 110px; margin-top: -55px; margin-left: -22px; }
+      .nucleus   { width: 26px; height: 26px; }
+      .btn-group { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Partikel background -->
+  <div class="particles" id="particles"></div>
+
+  <!-- Atom animasi -->
+  <div class="atom-wrap">
+    <div class="nucleus"></div>
+    <div class="orbit orbit-1"><div class="electron"></div></div>
+    <div class="orbit orbit-2"><div class="electron"></div></div>
+    <div class="orbit orbit-3"><div class="electron"></div></div>
+  </div>
+
+  <!-- Konten utama -->
+  <div class="main-content">
+    <div class="error-code">404</div>
+    <div class="error-title">Partikel Tidak Ditemukan</div>
+    <p class="error-desc">
+      Halaman yang kamu cari telah runtuh ke dimensi lain —<br>
+      atau mungkin tidak pernah ada dalam realitas ini.
+    </p>
+
+    <div class="error-quote">
+      <p>"Satu-satunya hal yang lebih tidak terbatas dari alam semesta adalah kemampuan manusia untuk tersesat di dalamnya."</p>
+      <cite>— Bvandia Science Journey</cite>
+    </div>
+
+    <div class="btn-group">
+      <a href="index.html" class="btn-home">
+        <i class="fas fa-home"></i> Kembali ke Beranda
+      </a>
+      <a class="btn-back" onclick="history.back()">
+        <i class="fas fa-arrow-left"></i> Halaman Sebelumnya
+      </a>
+    </div>
+  </div>
+
+  <!-- Fun fact card -->
+  <div class="fun-fact-box">
+    <i class="fas fa-lightbulb"></i>
+    <p id="funFact"></p>
+  </div>
+
+  <script src="transition.js"></script>
+  <script>
+    /* ── Generate partikel acak ── */
+    const container = document.getElementById("particles");
+    for (let i = 0; i < 28; i++) {
+      const p = document.createElement("div");
+      p.className = "particle";
+      const size = Math.random() * 4 + 2;
+      p.style.cssText = `
+        width: ${size}px;
+        height: ${size}px;
+        left: ${Math.random() * 100}%;
+        bottom: -${size}px;
+        animation-duration: ${Math.random() * 12 + 8}s;
+        animation-delay: ${Math.random() * 10}s;
+        opacity: ${Math.random() * 0.3 + 0.1};
+      `;
+      container.appendChild(p);
+    }
+
+    /* ── Fun facts sains di bawah ── */
+    const facts = [
+      "Fun fact: Dalam mekanika kuantum, partikel bisa ada di dua tempat sekaligus.",
+      "Fun fact: Ada lebih banyak kemungkinan permainan catur daripada atom di alam semesta yang teramati.",
+      "Fun fact: Neutrino melewati tubuhmu jutaan kali per detik tanpa kamu sadari.",
+      "Fun fact: Informasi tidak bisa musnah — bahkan di lubang hitam sekalipun.",
+      "Fun fact: 99,9999999% atom adalah ruang kosong. Termasuk atom penyusun halaman ini.",
+    ];
+    document.getElementById("funFact").textContent =
+      facts[Math.floor(Math.random() * facts.length)];
+  </script>
+</body>
+</html>

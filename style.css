@@ -409,6 +409,89 @@ blockquote::before {
   color: #fff;
 }
 
+/* ===== TIMELINE ===== */
+.timeline {
+  position: relative;
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem 0;
+}
+
+/* Garis dipindah ke sisi kiri untuk semua perangkat */
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 15px; /* Garis ditarik ke kiri */
+  width: 3px;
+  height: 100%;
+  background: rgba(242, 169, 0, 0.3);
+}
+
+/* Item Timeline - Semua dibikin 100% dan rata kiri */
+.timeline-item {
+  position: relative;
+  width: 100%; /* Memenuhi ruang yang ada */
+  padding-left: 45px; /* Jarak untuk mengakomodasi garis dan titik */
+  padding-right: 20px;
+  box-sizing: border-box;
+  text-align: left; /* Teks selalu rata kiri */
+  margin-bottom: 30px; /* Memberi jarak antar item */
+}
+
+/* Posisi Titik - Konsisten di kiri untuk semua item */
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  top: 28px;
+  left: 8px; /* Diposisikan agar pas di tengah garis (karena garis di left 15px) */
+  width: 14px;
+  height: 14px;
+  background: var(--accent);
+  border-radius: 50%;
+  z-index: 2;
+  box-shadow: 0 0 0 4px white;
+}
+
+/* Card isi */
+.timeline-content {
+  background: white;
+  padding: 1.3rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+}
+
+/* Hover */
+.timeline-content:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+}
+
+/* Tahun */
+.timeline-content h3 {
+  margin: 0 0 5px;
+  color: var(--accent);
+  font-weight: 800;
+}
+
+/* FIX: hilangkan efek huruf besar */
+.timeline-content p::first-letter {
+  font-size: inherit;
+  float: none;
+  color: inherit;
+  font-weight: normal;
+}
+
+/* ===== RESPONSIVE (HP) ===== */
+/* Media query ini sekarang hanya opsional, misal ingin memperkecil padding di layar kecil */
+@media (max-width: 768px) {
+  .timeline-item {
+    padding-right: 15px; /* Sedikit mengurangi padding kanan di HP jika perlu */
+  }
+}
+
+
 .reader-response {
   text-align: center;
   margin: 4rem auto;
