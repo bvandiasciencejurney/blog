@@ -12,7 +12,17 @@
   <meta property="og:title" content="Keeping the Ember Alive">
   <meta property="og:description" content="Pemuda abad-21 yang menjadi penerus estafet peradaban dengan semangat keberanian  dan keyakinannya akan berfikir adalah hal yang mutlak dan tak terbatas, sehingga ia tidak pernah takut untuk terus berfikir dan bertanya untuk mendapatkan secerca cahaya.">
   <meta property="og:url" content="https://bvandiasciencejurney.github.io/keepingtheemberalive.html">
-  <meta property="og:image" content="keepingtheemberalive.png">
+
+<!-- Sesudah -->
+<meta property="og:image" content="https://bvandiasciencejurney.github.io/blog/keepingtheemberalive.png">
+
+<!-- Ukuran gambar (wajib agar WhatsApp mau load) -->
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<!-- Untuk Twitter/X -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://bvandiasciencejurney.github.io/keepingtheemberalive.png">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -66,6 +76,7 @@
       -webkit-font-smoothing: antialiased;
       background-image: radial-gradient(#e5e5e5 1px, transparent 1px);
       background-size: 30px 30px;
+      overflow-x: clip;
     }
 
     ::selection {
@@ -99,10 +110,13 @@
       padding: 1.25rem 2rem;
       position: sticky;
       top: 0;
+      left: 0;
+      right: 0;
       z-index: 100;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      width: 100%;
     }
 
     .header-inner {
@@ -112,6 +126,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
+      min-width: 0;
     }
 
     .logo-wrap {
@@ -132,6 +147,10 @@
       font-weight: 700;
       color: #ffffff;
       letter-spacing: -0.01em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      min-width: 0;
     }
 
     .logo-text span { color: var(--gold); }
@@ -183,6 +202,7 @@
     .article-hero {
       position: relative;
       overflow: hidden;
+      flex-shrink: 0;
     }
 
     .hero-image-wrap {
@@ -230,6 +250,12 @@
       max-width: var(--max-prose);
       margin: 0 auto;
       padding: 2.5rem 1.5rem 0;
+    }
+
+    @media (max-width: 640px) {
+      .article-meta-header {
+        padding: 1.75rem 1rem 0;
+      }
     }
 
     .article-category {
@@ -331,6 +357,7 @@
       grid-template-columns: 1fr 220px;
       gap: 3rem;
       align-items: start;
+      box-sizing: border-box;
     }
 
     @media (max-width: 960px) {
@@ -338,6 +365,12 @@
         grid-template-columns: 1fr;
       }
       .toc-sidebar { display: none; }
+    }
+
+    @media (max-width: 640px) {
+      .article-layout {
+        padding: 0 1rem 3rem;
+      }
     }
 
     /* ============================================
@@ -501,6 +534,14 @@
       border-left: 3px solid var(--gold);
       border-radius: 0 var(--radius-md) var(--radius-md) 0;
       overflow: hidden;
+      word-break: break-word;
+    }
+
+    @media (max-width: 640px) {
+      .pull-quote {
+        padding: 1.25rem 1.25rem 1.25rem 1.75rem;
+        margin: 1.75rem 0;
+      }
     }
 
     .pull-quote::before {
@@ -720,6 +761,18 @@
       line-height: 1.65;
       color: var(--text);
       border: 1px solid var(--divider);
+      word-break: break-word;
+      overflow-wrap: break-word;
+    }
+
+    @media (max-width: 640px) {
+      .dialog-bubble {
+        max-width: 85%;
+        font-size: 0.85rem;
+      }
+      .dialog-body {
+        padding: 1rem;
+      }
     }
 
     .dialog-line.right .dialog-bubble {
@@ -908,6 +961,7 @@
     .reaction-group {
       display: flex;
       gap: 0.5rem;
+      flex-wrap: wrap;
     }
 
     .reaction-btn {
@@ -1106,6 +1160,11 @@
       border-top: 1px solid var(--divider);
       padding: 2.5rem 2rem;
       text-align: center;
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      box-sizing: border-box;
+      transform: none !important;
     }
 
     .footer-inner {
@@ -1187,6 +1246,12 @@
     @media (max-width: 640px) {
       .hamburger { display: flex; }
 
+      header {
+        position: sticky;
+        top: 0;
+        overflow: visible;
+      }
+
       nav {
         display: none;
         position: absolute;
@@ -1197,12 +1262,27 @@
         flex-direction: column;
         align-items: stretch;
         padding: 0.5rem;
+        width: 100%;
+        box-sizing: border-box;
       }
 
       nav.open { display: flex; }
 
       nav a {
         padding: 0.65rem 1rem;
+        font-size: 0.9rem;
+      }
+
+      header {
+        padding: 1rem 1.25rem;
+      }
+
+      .logo-wrap img {
+        width: 28px;
+        height: 28px;
+      }
+
+      .logo-text {
         font-size: 0.9rem;
       }
     }
