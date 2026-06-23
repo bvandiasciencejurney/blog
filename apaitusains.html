@@ -1,0 +1,1879 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apa Itu "Sains"? | Bvandia Science Journey</title>
+
+  <!-- SEO & Open Graph -->
+  <meta name="description" content="Sains bukan sekadar kumpulan fakta — ia adalah cara berpikir. Berdasarkan podcast Cania Cita &amp; Sabda, artikel ini mengupas metodologi ilmiah sebagai sistem operasi berpikir yang relevan untuk semua orang.">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Bvandia Science Journey">
+  <meta property="og:title" content='Apa Itu "Sains"?'>
+  <meta property="og:description" content="Sains bukan sekadar kumpulan fakta — ia adalah cara berpikir. Berdasarkan podcast Cania Cita &amp; Sabda, artikel ini mengupas metodologi ilmiah sebagai sistem operasi berpikir yang relevan untuk semua orang.">
+  <meta property="og:url" content="https://bvandiasciencejurney.github.io/apaitusains.html">
+  <meta property="og:image" content="apaitusains.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    /* ============================================
+       DESIGN TOKENS — synced with index.html palette
+    ============================================ */
+    :root {
+      --bg:          #fafafa;
+      --bg-card:     #ffffff;
+      --bg-hover:    #f0f0f0;
+      --text:        #222222;
+      --text-muted:  #555555;
+      --text-dim:    #888888;
+      --gold:        #f2a900;
+      --gold-light:  #f5bc33;
+      --blue:        #2e7aad;
+      --blue-light:  #4a9ed4;
+      --mark-bg:     rgba(242, 169, 0, 0.15);
+      --mark-border: rgba(242, 169, 0, 0.4);
+      --divider:     rgba(10, 10, 10, 0.10);
+      --radius-sm:   6px;
+      --radius-md:   12px;
+      --radius-lg:   20px;
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body:    'Inter', system-ui, sans-serif;
+      --font-mono:    'JetBrains Mono', 'Courier New', monospace;
+      --max-prose:    680px;
+      --transition:   0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ============================================
+       RESET & BASE
+    ============================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-weight: 400;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+      background-image: radial-gradient(#e5e5e5 1px, transparent 1px);
+      background-size: 30px 30px;
+      overflow-x: clip;
+    }
+
+    ::selection {
+      background: rgba(242, 169, 0, 0.3);
+      color: var(--text);
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { color: var(--blue-light); text-decoration: underline; }
+
+    /* ============================================
+       READING PROGRESS BAR
+    ============================================ */
+    #reading-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--gold), var(--blue));
+      z-index: 9999;
+      transition: width 0.1s linear;
+    }
+
+    /* ============================================
+       HEADER
+    ============================================ */
+    header {
+      background: linear-gradient(180deg, #0a0a0a 0%, #111111 100%);
+      border-bottom: 1px solid rgba(242, 169, 0, 0.2);
+      padding: 1.25rem 2rem;
+      position: sticky;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .header-inner {
+      max-width: 1140px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      min-width: 0;
+    }
+
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+    }
+
+    .logo-wrap img {
+      width: 32px;
+      height: 32px;
+    }
+
+    .logo-text {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      min-width: 0;
+    }
+
+    .logo-text span { color: var(--gold); }
+
+    /* NAV */
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    nav a {
+      font-family: var(--font-body);
+      font-size: 0.825rem;
+      font-weight: 500;
+      color: #aaaaaa;
+      text-decoration: none;
+      padding: 0.4rem 0.85rem;
+      border-radius: var(--radius-sm);
+      transition: color var(--transition), background var(--transition);
+      letter-spacing: 0.03em;
+    }
+
+    nav a:hover {
+      color: #ffffff;
+      background: rgba(255,255,255,0.08);
+      text-decoration: none;
+    }
+
+    nav a.active {
+      color: var(--gold);
+      background: rgba(242, 169, 0, 0.1);
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #ffffff;
+      font-size: 1.2rem;
+      padding: 0.25rem;
+    }
+
+    /* ============================================
+       HERO / ARTICLE HEADER
+    ============================================ */
+    .article-hero {
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .hero-image-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 21/9;
+      overflow: hidden;
+    }
+
+    @media (max-width: 768px) {
+      .hero-image-wrap { aspect-ratio: 16/9; }
+    }
+
+    .hero-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .hero-image-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        transparent 40%,
+        rgba(250,250,250,0.6) 70%,
+        var(--bg) 100%
+      );
+    }
+
+    .hero-caption {
+      position: absolute;
+      bottom: 1rem;
+      right: 1.25rem;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: rgba(34,34,34,0.5);
+      z-index: 1;
+    }
+
+    /* ARTICLE META HEADER */
+    .article-meta-header {
+      max-width: var(--max-prose);
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 0;
+    }
+
+    @media (max-width: 640px) {
+      .article-meta-header {
+        padding: 1.75rem 1rem 0;
+      }
+    }
+
+    .article-category {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(242, 169, 0, 0.1);
+      border: 1px solid rgba(242, 169, 0, 0.2);
+      padding: 0.3rem 0.75rem;
+      border-radius: 99px;
+      margin-bottom: 1.25rem;
+    }
+
+    .article-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.9rem, 5vw, 3rem);
+      font-weight: 900;
+      line-height: 1.2;
+      color: var(--text);
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .article-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 1.75rem;
+      font-weight: 300;
+    }
+
+    .article-byline {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-top: 1px solid var(--divider);
+      border-bottom: 1px solid var(--divider);
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .byline-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--blue));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--bg);
+      flex-shrink: 0;
+    }
+
+    .byline-info {
+      flex: 1;
+    }
+
+    .byline-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+
+    .byline-meta {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 0.15rem;
+    }
+
+    .byline-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .byline-meta i { font-size: 0.7rem; color: var(--gold); }
+
+    /* ============================================
+       LAYOUT: PROSE + STICKY TOC
+    ============================================ */
+    .article-layout {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 3rem;
+      align-items: start;
+      box-sizing: border-box;
+    }
+
+    @media (max-width: 960px) {
+      .article-layout {
+        grid-template-columns: 1fr;
+      }
+      .toc-sidebar { display: none; }
+    }
+
+    @media (max-width: 640px) {
+      .article-layout {
+        padding: 0 1rem 3rem;
+      }
+    }
+
+    /* ============================================
+       TABLE OF CONTENTS (Sidebar)
+    ============================================ */
+    .toc-sidebar {
+      position: sticky;
+      top: 80px;
+    }
+
+    .toc-box {
+      background: var(--bg-card);
+      border: 1px solid var(--divider);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+    }
+
+    .toc-title {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.875rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .toc-list {
+      list-style: none;
+    }
+
+    .toc-list li + li { margin-top: 0.1rem; }
+
+    .toc-list a {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      display: block;
+      padding: 0.3rem 0.5rem;
+      border-radius: var(--radius-sm);
+      border-left: 2px solid transparent;
+      transition: all var(--transition);
+      line-height: 1.4;
+    }
+
+    .toc-list a:hover,
+    .toc-list a.active {
+      color: var(--gold);
+      background: rgba(242, 169, 0, 0.08);
+      border-left-color: var(--gold);
+      text-decoration: none;
+    }
+
+    /* ============================================
+       ARTICLE CONTENT — PROSE
+    ============================================ */
+    .article-content {
+      min-width: 0;
+    }
+
+    .prose {
+      max-width: var(--max-prose);
+    }
+
+    .prose p {
+      font-size: 1.0625rem;
+      line-height: 1.85;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+
+    /* Drop cap for first paragraph */
+    .prose > p:first-of-type::first-letter {
+      font-family: var(--font-display);
+      font-size: 4rem;
+      font-weight: 900;
+      float: left;
+      line-height: 0.85;
+      margin-right: 0.1em;
+      margin-top: 0.08em;
+      color: var(--gold);
+    }
+
+    .prose h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 3vw, 1.75rem);
+      font-weight: 700;
+      color: var(--text);
+      margin-top: 3rem;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+      padding-top: 1rem;
+      border-top: 1px solid var(--divider);
+    }
+
+    .prose h3 {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+      font-style: italic;
+    }
+
+    .prose strong { color: var(--text); font-weight: 600; }
+
+    .prose em { color: var(--text-muted); }
+
+    .prose mark {
+      background: var(--mark-bg);
+      color: var(--gold-light);
+      padding: 0.1em 0.3em;
+      border-radius: 3px;
+      border-bottom: 1px solid var(--mark-border);
+    }
+
+    .prose a {
+      color: var(--blue);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: rgba(74,158,191,0.4);
+    }
+
+    .prose a:hover {
+      color: var(--blue-light);
+      text-decoration-color: var(--blue-light);
+    }
+
+    /* ============================================
+       ARTICLE ILLUSTRATION & CAPTION
+    ============================================ */
+    .article-figure {
+      margin: 2.5rem 0;
+    }
+
+    .article-figure img {
+      width: 100%;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--divider);
+    }
+
+    .article-caption {
+      margin-top: 0.6rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      text-align: center;
+    }
+
+    /* ============================================
+       PULL QUOTE (Blockquote)
+    ============================================ */
+    .pull-quote {
+      position: relative;
+      margin: 2.5rem 0;
+      padding: 1.75rem 2rem 1.75rem 2.5rem;
+      background: var(--bg-card);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      overflow: hidden;
+      word-break: break-word;
+    }
+
+    @media (max-width: 640px) {
+      .pull-quote {
+        padding: 1.25rem 1.25rem 1.25rem 1.75rem;
+        margin: 1.75rem 0;
+      }
+    }
+
+    .pull-quote::before {
+      content: '\201C';
+      font-family: var(--font-display);
+      font-size: 6rem;
+      color: rgba(242, 169, 0, 0.12);
+      position: absolute;
+      top: -0.5rem;
+      left: 0.75rem;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .pull-quote p {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-style: italic;
+      line-height: 1.65;
+      color: var(--text);
+      margin: 0 0 0.5rem;
+    }
+
+    .pull-quote cite {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--gold);
+      font-style: normal;
+      letter-spacing: 0.05em;
+    }
+
+    /* ============================================
+       HIGHLIGHT BOX / CALLOUT
+    ============================================ */
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.25rem 1.5rem;
+      border-radius: var(--radius-md);
+      margin: 2rem 0;
+      align-items: flex-start;
+    }
+
+    .callout-info {
+      background: rgba(74, 158, 191, 0.08);
+      border: 1px solid rgba(74, 158, 191, 0.2);
+    }
+
+    .callout-insight {
+      background: rgba(242, 169, 0, 0.08);
+      border: 1px solid rgba(242, 169, 0, 0.2);
+    }
+
+    .callout-warning {
+      background: rgba(220, 100, 80, 0.08);
+      border: 1px solid rgba(220, 100, 80, 0.2);
+    }
+
+    .callout-icon {
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .callout-info .callout-icon { color: var(--blue); }
+    .callout-insight .callout-icon { color: var(--gold); }
+    .callout-warning .callout-icon { color: #DC6450; }
+
+    .callout-body p {
+      font-size: 0.925rem;
+      margin: 0;
+      line-height: 1.65;
+      color: var(--text);
+    }
+
+    .callout-body strong { font-weight: 600; }
+
+    /* ============================================
+       TIMELINE COMPONENT
+    ============================================ */
+    .timeline {
+      position: relative;
+      margin: 2.5rem 0;
+      padding-left: 0;
+      list-style: none;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 1.4rem;
+      top: 0.5rem;
+      bottom: 0.5rem;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 3.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .timeline-item:last-child { margin-bottom: 0; }
+
+    .timeline-dot {
+      position: absolute;
+      left: 0.95rem;
+      top: 0.4rem;
+      width: 0.9rem;
+      height: 0.9rem;
+      background: var(--bg);
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      transition: background var(--transition);
+    }
+
+    .timeline-item:hover .timeline-dot {
+      background: var(--gold);
+    }
+
+    .timeline-year {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      margin-bottom: 0.3rem;
+      display: block;
+    }
+
+    .timeline-heading {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+
+    .timeline-body {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* ============================================
+       DIALOG / CONVERSATION COMPONENT
+    ============================================ */
+    .dialog-box {
+      margin: 2.5rem 0;
+      background: var(--bg-card);
+      border: 1px solid var(--divider);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+
+    .dialog-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.75rem 1.25rem;
+      background: rgba(0,0,0,0.03);
+      border-bottom: 1px solid var(--divider);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      letter-spacing: 0.06em;
+    }
+
+    .dialog-header i { color: var(--gold); }
+
+    .dialog-body {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .dialog-line {
+      display: flex;
+      gap: 0.875rem;
+      align-items: flex-start;
+    }
+
+    .dialog-line.right {
+      flex-direction: row-reverse;
+    }
+
+    .dialog-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      flex-shrink: 0;
+      font-family: var(--font-display);
+      font-weight: 700;
+    }
+
+    .dialog-avatar.av-a {
+      background: linear-gradient(135deg, #2e7aad, #1a5a8a);
+      color: white;
+    }
+
+    .dialog-avatar.av-b {
+      background: linear-gradient(135deg, var(--gold), #c08800);
+      color: var(--bg);
+    }
+
+    .dialog-bubble {
+      max-width: 78%;
+      background: rgba(0,0,0,0.04);
+      border-radius: var(--radius-md);
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+      line-height: 1.65;
+      color: var(--text);
+      border: 1px solid var(--divider);
+      word-break: break-word;
+      overflow-wrap: break-word;
+    }
+
+    @media (max-width: 640px) {
+      .dialog-bubble {
+        max-width: 85%;
+        font-size: 0.85rem;
+      }
+      .dialog-body {
+        padding: 1rem;
+      }
+    }
+
+    .dialog-line.right .dialog-bubble {
+      background: rgba(242, 169, 0, 0.08);
+      border-color: rgba(242, 169, 0, 0.15);
+    }
+
+    .dialog-speaker {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      margin-bottom: 0.3rem;
+      display: block;
+      letter-spacing: 0.05em;
+    }
+
+    .dialog-line.right .dialog-speaker {
+      text-align: right;
+      color: rgba(242, 169, 0, 0.6);
+    }
+
+    /* ============================================
+       VIDEO EMBED
+    ============================================ */
+    .video-wrap {
+      margin: 2.5rem 0;
+    }
+
+    .video-label {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .video-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--divider);
+    }
+
+    .video-iframe-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--divider);
+    }
+
+    .video-iframe-wrap iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* ============================================
+       KEY CONCEPT CARD
+    ============================================ */
+    .concept-card {
+      background: var(--bg-card);
+      border: 1px solid var(--divider);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      margin: 2rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .concept-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--blue));
+    }
+
+    .concept-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .concept-term {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.6rem;
+    }
+
+    .concept-body {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* ============================================
+       REFERENCES
+    ============================================ */
+    .references-section {
+      max-width: var(--max-prose);
+      margin: 3rem 0 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--divider);
+    }
+
+    .references-title {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .references-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--divider);
+    }
+
+    .references-list {
+      list-style: none;
+      counter-reset: ref;
+    }
+
+    .references-list li {
+      counter-increment: ref;
+      display: flex;
+      gap: 1rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.875rem;
+      line-height: 1.55;
+    }
+
+    .references-list li::before {
+      content: counter(ref);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--gold);
+      background: rgba(242, 169, 0, 0.1);
+      border-radius: 4px;
+      width: 1.4rem;
+      height: 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 0.05rem;
+    }
+
+    .references-list a {
+      color: var(--blue);
+    }
+
+    /* ============================================
+       REACTION + SHARE
+    ============================================ */
+    .article-feedback {
+      max-width: var(--max-prose);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 2rem 0;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .reaction-group {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .reaction-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.85rem;
+      font-family: var(--font-body);
+      font-weight: 500;
+      color: var(--text-muted);
+      background: var(--bg-card);
+      border: 1px solid var(--divider);
+      border-radius: 99px;
+      padding: 0.45rem 1rem;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .reaction-btn:hover {
+      color: var(--text);
+      border-color: rgba(0,0,0,0.15);
+      background: var(--bg-hover);
+    }
+
+    .reaction-btn.active {
+      color: var(--gold);
+      border-color: rgba(242, 169, 0, 0.5);
+      background: rgba(242, 169, 0, 0.12);
+      transform: scale(1.05);
+      box-shadow: 0 0 0 3px rgba(242, 169, 0, 0.15);
+    }
+
+    .reaction-btn.active i {
+      animation: icon-pop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes icon-pop {
+      0%   { transform: scale(1); }
+      50%  { transform: scale(1.5); }
+      100% { transform: scale(1); }
+    }
+
+    .reaction-btn.disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      pointer-events: none;
+      transform: scale(1);
+    }
+
+    /* Toast notification */
+    .feedback-toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: #1a1a1a;
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 500;
+      padding: 0.7rem 1.4rem;
+      border-radius: 99px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      white-space: nowrap;
+    }
+
+    .feedback-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .feedback-toast i { color: var(--gold); }
+
+    .share-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      font-family: var(--font-body);
+      font-weight: 500;
+      color: var(--bg);
+      background: var(--gold);
+      border: none;
+      border-radius: 99px;
+      padding: 0.45rem 1.25rem;
+      cursor: pointer;
+      transition: background var(--transition), transform var(--transition);
+    }
+
+    .share-btn:hover {
+      background: var(--gold-light);
+      transform: translateY(-1px);
+    }
+
+    /* ============================================
+       RELATED ARTICLES
+    ============================================ */
+    .related-section {
+      max-width: var(--max-prose);
+      margin: 3rem 0;
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--divider);
+    }
+
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    @media (max-width: 560px) {
+      .related-grid { grid-template-columns: 1fr; }
+    }
+
+    .related-card {
+      background: var(--bg-card);
+      border: 1px solid var(--divider);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      text-decoration: none;
+      display: block;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+
+    .related-card:hover {
+      border-color: rgba(242, 169, 0, 0.25);
+      transform: translateY(-2px);
+      text-decoration: none;
+    }
+
+    .related-card-category {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .related-card-title {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.35;
+    }
+
+    /* BACK LINK */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 0.5rem 0;
+      transition: color var(--transition);
+      margin-bottom: 1rem;
+    }
+
+    .back-link:hover {
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    /* ============================================
+       FOOTER
+    ============================================ */
+    footer {
+      background: var(--bg-card);
+      border-top: 1px solid var(--divider);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      box-sizing: border-box;
+      transform: none !important;
+    }
+
+    .footer-inner {
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+
+    .footer-logo span { color: var(--gold); }
+
+    .footer-tagline {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-social {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-social a {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.05);
+      border: 1px solid var(--divider);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      transition: all var(--transition);
+      text-decoration: none;
+    }
+
+    .footer-social a:hover {
+      color: var(--gold);
+      border-color: rgba(242, 169, 0, 0.3);
+      background: rgba(242, 169, 0, 0.08);
+    }
+
+    .footer-copy {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-dim);
+    }
+
+    /* ============================================
+       SCROLL REVEAL ANIMATION
+    ============================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    /* ============================================
+       MOBILE NAV
+    ============================================ */
+    @media (max-width: 640px) {
+      .hamburger { display: flex; }
+
+      header {
+        position: sticky;
+        top: 0;
+        overflow: visible;
+        padding: 1rem 1.25rem;
+      }
+
+      nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0; right: 0;
+        background: #111111;
+        border-bottom: 1px solid rgba(242, 169, 0, 0.2);
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0.5rem;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      nav.open { display: flex; }
+
+      nav a {
+        padding: 0.65rem 1rem;
+        font-size: 0.9rem;
+      }
+
+      .logo-wrap img {
+        width: 28px;
+        height: 28px;
+      }
+
+      .logo-text {
+        font-size: 0.9rem;
+      }
+    }
+
+    /* ============================================
+       UTILITY
+    ============================================ */
+    hr.divider {
+      border: none;
+      border-top: 1px solid var(--divider);
+      margin: 2.5rem 0;
+    }
+
+    /* ============================================
+       VISITOR COUNTER
+    ============================================ */
+    .visitor-counter {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      margin: 0.8rem 0;
+      font-size: 0.82rem;
+      color: #777;
+    }
+
+    .visitor-counter i {
+      color: #f2a900;
+    }
+
+    .counter-badge {
+      height: 20px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== READING PROGRESS ========== -->
+  <div id="reading-progress"></div>
+
+  <!-- ========== HEADER ========== -->
+  <header>
+    <div class="header-inner">
+      <a class="logo-wrap" href="index.html">
+        <img src="logo.svg" alt="Logo Bvandia">
+        <span class="logo-text">Bvandia <span>Science</span> Journey</span>
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+      <nav id="main-nav">
+        <a href="index.html">Home</a>
+        <a href="artikel.html" class="active">Articles</a>
+        <a href="about.html">About</a>
+        <a href="kontak.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========== HERO IMAGE ========== -->
+  <div class="article-hero">
+    <div class="hero-image-wrap">
+      <!-- GANTI: src dengan URL gambar cover artikel -->
+      <img src="apaitusains(header1).png" alt="Ilustrasi konsep Scientific Thinking" id="hero-img">
+      <span class="hero-caption">Illustration by ChatGPT</span>
+    </div>
+  </div>
+
+  <!-- ========== ARTICLE META ========== -->
+  <div class="article-meta-header">
+    <span class="article-category">
+      <i class="fas fa-flask"></i>
+      Sains &amp; Epistemologi
+    </span>
+
+    <h1 class="article-title">Apa Itu &ldquo;Sains&rdquo;?</h1>
+
+    <p class="article-subtitle">
+      Wawasan mendalam dari Podcast Cania Cita &amp; Sabda yang membahas tentang apa itu sains? pemahaman tentang bagiamana sains adalah sebuah <em>cara mengetahui sesuatu</em> — sistem operasi berpikir yang bisa dipakai semua orang, di semua bidang kehidupan.
+    </p>
+
+    <div class="article-byline">
+      <div class="byline-avatar">B</div>
+      <div class="byline-info">
+        <div class="byline-name">Bima Saktiawan</div>
+        <div class="byline-meta">
+          <span><i class="fas fa-calendar-alt"></i> 17 Juni 2026</span>
+          <span><i class="fas fa-stopwatch"></i> <span id="reading-time">—</span> menit membaca</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== ARTICLE LAYOUT ========== -->
+  <div class="article-layout">
+
+    <!-- MAIN CONTENT -->
+    <article class="article-content">
+      <a href="artikel.html" class="back-link">
+        <i class="fas fa-arrow-left"></i> Kembali ke artikel
+      </a>
+
+      <div class="prose" id="article-prose">
+
+        <!-- PARAGRAF PEMBUKA -->
+        <p>
+          Sains seringkali disalahpahami sebagai sekumpulan fakta atau benda-benda alam. Namun dalam percakapan Cania Cita &amp; Sabda dalam sebuah podcast bertajuk <em>Pahami Ini Dulu Sebelum Bahas Agama dan Sains</em>, dijelaskan bahwa sains didefinisikan secara jauh lebih mendasar — yaitu sebagai <strong>cara untuk mengetahui sesuatu</strong> (<em>the way to know</em>) atau <strong>sistem operasi berpikir</strong> (<em>operating system of thought</em>).
+        </p>
+
+        <p>
+          Podcast ini menekankan bahwa sains bukanlah kumpulan kesimpulan, melainkan sebuah metodologi untuk memperoleh pengetahuan yang paling benar dan <em>reliable</em>. Memahami metode ilmiah sangat berguna di kehidupan sehari-hari — bukan hanya di laboratorium. Dan tujuan utamanya adalah membangun <mark>budaya berpikir ilmiah</mark> (<em>scientific thinking</em>) agar keputusan kita lebih baik, baik secara pribadi maupun kolektif.
+        </p>
+
+        <blockquote class="pull-quote reveal">
+          <p>jadi Sains tuh kata dasarnya adalah "<em>scientia</em>" the way to know lah gitu untuk mengetahui sesuatu, nah cuman untuk mengetahui suatu itu kan enggak cuman eh gua tahu ini, gua tahu itu gitu. Oh, gua tahu informasi ini. Informasi itu ada. Cuman penting banget adalah <strong>oh gua pengin tahu sesuatu, tapi gua pengen make sure yang gua tahu tuh benar gitu</strong>. Jadi ada banyak pengetahuan apa yang perlu gua tahu dan gua mau make sure pengetahuan yang gua tahu ini benar.</p>
+          <cite>— Sabda PS</cite>
+        </blockquote>
+
+        <!-- SECTION 1 -->
+        <h2 id="inti-sains">1. Inti dari Sains</h2>
+
+        <p>
+          Dalam percakapan antara <em>Cania &amp; Sabda</em> mereka memaparkan bahwa Sains terdiri dari dua elemen utama yang saling berkaitan dan tidak bisa dipisahkan satu sama lain.
+        </p>
+
+        <div class="concept-card reveal">
+          <div class="concept-label">Elemen Pertama</div>
+          <div class="concept-term">Metodologi</div>
+          <p class="concept-body">Menentukan <em>bagaimana</em> kita tahu bahwa sesuatu yang kita ketahui itu benar. Fokus utamanya adalah mencari kebenaran realita seakurat mungkin — bukan membenarkan apa yang sudah kita percayai.</p>
+        </div>
+
+        <div class="concept-card reveal">
+          <div class="concept-label">Elemen Kedua</div>
+          <div class="concept-term">Body of Knowledge</div>
+          <p class="concept-body">Kumpulan pengetahuan yang dibangun berdasarkan metode tersebut, yang terus diperbarui seiring adanya data, eksperimen, atau observasi baru. Ini bukan sesuatu yang statis — ia hidup dan berkembang.</p>
+        </div>
+
+        <div class="callout callout-insight reveal">
+          <span class="callout-icon"><i class="fas fa-lightbulb"></i></span>
+          <div class="callout-body">
+            <p><strong>Perbedaan Penting Kesimpulan VS metode:</strong> “Informasi negatif tentang cewek lain bisa memperkuat bonding antar cewek” adalah <strong>kesimpulan</strong>. Sains adalah <strong>proses</strong> bagaimana kita mendefinisikan, mengukur, menguji, dan memvalidasi klaim tersebut.</p>
+          </div>
+        </div>
+
+        <p>
+          Sains juga menghasilkan <strong>model</strong> yang mampu menjelaskan masa lalu (retrodiksi), memahami kondisi sekarang, dan memprediksi masa depan (<em>predictability</em>). Jadi sains bukan sekadar mengumpulkan fakta — ia membangun peta realita yang bisa kita andalkan.
+        </p>
+
+        <!-- SECTION 2 -->
+        <h2 id="elemen-metodologi">2. Elemen Kunci Metodologi Ilmiah</h2>
+
+        <p>Ada lima elemen kunci yang membentuk metodologi ilmiah. Masing-masing memiliki peran yang tidak bisa diabaikan.</p>
+
+        <h3>a. Observasi Empiris</h3>
+        <p>
+          Informasi harus <em>observable</em> — bisa diindrakan atau dideteksi, baik secara langsung maupun dengan alat seperti mikroskop atau teleskop. Pengukuran diupayakan seobjektif mungkin; misalnya menggunakan frekuensi gelombang cahaya daripada sekadar menyebut "warna merah".
+        </p>
+
+        <h3>b. Definisi yang Jelas &amp; Terukur</h3>
+        <p>
+          Banyak perdebatan kusir terjadi karena masing-masing pihak menggunakan definisi yang kabur. Metodologi saintifik memaksa kita mendefinisikan setiap variabel secara konkret dan <em>measurable</em>.
+        </p>
+
+        <div class="callout callout-info reveal">
+          <span class="callout-icon"><i class="fas fa-circle-info"></i></span>
+          <div class="callout-body">
+            <p><strong>Contoh:</strong> Alih-alih bertanya <em>"Apakah dia orang baik?"</em>, sains mengubahnya menjadi: <em>"Apakah dia memenuhi kriteria tindakan X, Y, dan Z secara konsisten dalam situasi A?"</em> — dengan standar penilaian yang jauh lebih objektif dan bisa disepakati bersama.</p>
+          </div>
+        </div>
+
+        <p>
+          Metode ini hanya bekerja jika semua pihak <strong>sepakat terlebih dahulu</strong> mengenai definisi variabel-variabel tersebut. Tanpa kesepakatan di awal, tidak ada kesimpulan objektif yang bisa dicapai. Selain itu, perilaku konsisten di situasi A belum tentu berlaku di situasi B, sains selalu mempertimbangkan <em>context-dependent</em>.
+        </p>
+
+        <h3>c. Hipotesis yang Berkualitas</h3>
+        <p>
+          Hipotesis adalah tebakan yang baik — bukan sembarang dugaan. Hipotesis berkualitas tinggi harus memenuhi empat ciri: spesifik &amp; jelas, dapat diuji (<em>testable</em>), dapat dikonfirmasi atau difalsifikasi, dan memiliki ukuran keberhasilan yang jelas.
+        </p>
+
+        <h3>d. Pengujian &amp; Reliabilitas</h3>
+        <p>
+          Inovasi metode pengujian sangat penting agar hasil benar-benar <em>reliable</em> — bukan hanya bergantung pada <em>self-report</em> yang bisa bias atau perilaku yang berubah karena sedang diamati. Yang tak kalah penting adalah <strong>replikasi</strong>: orang lain harus bisa mengulang eksperimen dengan definisi yang sama dan mendapatkan hasil serupa.
+        </p>
+
+        <h3>e. Falsifiabilitas — Bisa Disangkal</h3>
+
+        <div class="callout callout-insight reveal">
+          <span class="callout-icon"><i class="fas fa-lightbulb"></i></span>
+          <div class="callout-body">
+            <p><strong>Jebakan Terbesar:</strong> <em>Confirmation bias</em> — kecenderungan hanya mencari pembenaran atas apa yang sudah kita percayai. Hipotesis yang baik memberikan ruang untuk kemungkinan salah. Jika sebuah pernyataan tidak bisa dibuktikan salah, ia bukan berada di ranah sains — melainkan ranah dogma.</p>
+          </div>
+        </div>
+
+        <p>
+          Fokusnya adalah mencari kebenaran, bukan mempertahankan siapa yang benar. Jika ada bukti baru yang lebih baik, hipotesis lama harus direvisi. Ini bukan kekalahan — ini adalah bagaimana sains maju.
+        </p>
+        <blockquote class="pull-quote reveal">
+          <p>Scientific Community itu justru the spirit-nya adalah finding the truth. <strong>Bukan gua benar</strong>. Ini penting banget nih. Jadi, kita spiritnya justru ya <strong>kita sama-sama satu spirit untuk finding the truth</strong>. Jadinya if someone bisa membuktikan tebakan gua salah atau tebakan gua kurang kurang bagus nih akurasinya atau apa, that's a good thing.</p>
+   <cite>— Sabda PS</cite>
+        </blockquote>
+        <!-- SECTION 3 -->
+        <h2 id="melawan-tribal-spirit">3. Mentalitas: Melawan Tribal Spirit</h2>
+
+        <p>
+          Salah satu poin paling menarik dari diskusi ini adalah kritik terhadap <strong>tribal spirit</strong> — mentalitas suku yang membuat orang mempertahankan argumen bukan karena argumennya benar, tetapi karena "kelompok saya" yang mengucapkannya.
+        </p>
+
+ 
+        
+     <p>Tribal spirit ini berbahaya karena membuat orang jadi defensif, sulit menerima koreksi, dan mengubah perdebatan menjadi pertarungan “siapa yang menang” bukan “apa yang paling benar”. Akibatnya muncul echo chamber, konfirmasi bias, dan polarisasi yang semakin parah di masyarakat, terutama di politik, media sosial, ideologi, hingga diskusi agama dan sains. </p><p>Spirit sejati <em>scientific thinking</em> justru berbeda. Tujuannya adalah mencari kebenaran, bukan membela ego atau identitas kelompok. Ketika ada bukti atau argumen yang lebih baik, kita seharusnya senang menerimanya karena itu berarti peta realitas kita menjadi lebih akurat. Kesalahan bukanlah kekalahan pribadi, melainkan kesempatan untuk berkembang.</p>
+
+        <p>
+          Kita perlu melepaskan ego “ide saya harus menang” dan menggantinya dengan sikap “ide yang paling sesuai dengan realita yang harus menang”. </p>
+          
+                  <blockquote class="pull-quote reveal">
+          <p>Tribal Spirit Mentality adalah hal yang usang gitu, untuk di ranah science. Karena ranah Sains tuh <strong>it's not about siapa yang benarnya</strong>, tapi kita bareng-bareng kolaborasi "at scale globally", untuk mencapai kebenaran-kebenaran realita dengan berbagai macam metodologi yang pas gitu ya, dan dengan input-input dari segala macam praktis-praktis yang ada atau Tribal Knowledge yang ada. itu semua bisa menjadi input karena the goal is <strong>to find peta realitas yang seakurat mungkin</strong> bareng-bareng gitu. </p>
+   <cite>— Sabda PS</cite>
+        </blockquote>
+        
+        <div class="callout callout-info reveal">
+          <span class="callout-icon"><i class="fas fa-circle-info"></i></span>
+          <div class="callout-body">
+            <p><strong>Konteks:</strong> Dalam podcast ini, istilah tribal digunakan dalam dua konteks yang berbeda. <strong>Tribal knowledge</strong> adalah pengetahuan lokal atau kearifan tradisional suatu komunitas yang sering kali sangat efektif di lingkungannya. Ini adalah harta budaya yang berharga. Sedangkan <strong>tribal spirit</strong> (mentalitas suku) adalah sikap negatif di mana seseorang mempertahankan suatu pandangan atau ide bukan karena kebenarannya, melainkan karena “ini berasal dari kelompok saya”. Inilah yang dikritik keras. <strong>Scientific thinking</strong> justru mengajak kita keluar dari tribal spirit tersebut — mengganti ego “kelompok saya harus menang” dengan semangat bersama mencari kebenaran, di mana bukti dan akurasi lebih penting daripada identitas kelompok.</p>
+          </div>
+        </div>
+        
+          <p>Sains pada hakikatnya adalah proyek kolaborasi umat manusia lintas batas suku, bangsa, agama, dan zaman. Setiap orang bisa berkontribusi selama inputnya memenuhi standar metodologi yang dapat dipertanggungjawabkan — <em>jelas, terukur, dapat diuji,</em> dan <em>transparan</em>. Pengetahuan lokal, kearifan tradisional, dan pengalaman pribadi pun sangat berharga sebagai bahan masukan.
+        </p>
+
+        <!-- SECTION 4 -->
+        <h2 id="mengapa-scientific-thinking">4. Mengapa Kita Harus Mengadopsi Cara Berpikir Ini?</h2>
+
+        <p>
+          <em>Scientific thinking</em> bukan hanya untuk ilmuwan profesional. Ini adalah spektrum yang bisa dilakukan semua orang — apa yang Cania &amp; Sabda sebut sebagai <em>amateur scientist</em>. Berikut manfaat konkretnya:
+        </p>
+
+        <ul class="timeline reveal">
+          <li class="timeline-item">
+            <div class="timeline-dot"></div>
+            <span class="timeline-year">Manfaat 1</span>
+            <div class="timeline-heading">Klaim yang Lebih Bertanggung Jawab</div>
+            <p class="timeline-body">Ketika kita membuat klaim, kita dipaksa untuk menyertakan definisi yang jelas dan bukti — bukan hanya opini atau anekdot yang ambigu.</p>
+          </li>
+          <li class="timeline-item">
+            <div class="timeline-dot"></div>
+            <span class="timeline-year">Manfaat 2</span>
+            <div class="timeline-heading">Pengambilan Keputusan yang Lebih Baik</div>
+            <p class="timeline-body">Keputusan karir, pertemanan, kebiasaan kesehatan — semua bisa lebih baik jika didasarkan pada model konsekuensi yang logis, bukan emosi sesaat.</p>
+          </li>
+          <li class="timeline-item">
+            <div class="timeline-dot"></div>
+            <span class="timeline-year">Manfaat 3</span>
+            <div class="timeline-heading">Ketenangan Intelektual</div>
+            <p class="timeline-body">Saat dikritik dengan bukti yang kuat, kita tidak merasa "kalah" — kita merasa "beruntung" karena peta realitas kita sekarang lebih akurat.</p>
+          </li>
+          <li class="timeline-item">
+            <div class="timeline-dot"></div>
+            <span class="timeline-year">Manfaat 4</span>
+            <div class="timeline-heading">Penyelesaian Masalah yang Efektif</div>
+            <p class="timeline-body">Masalah besar dipecah menjadi hipotesis-hipotesis kecil yang bisa diuji satu per satu — sehingga yang tampak rumit menjadi terasa lebih terkelola.</p>
+          </li>
+        </ul>
+
+        <!-- SECTION 5 -->
+        <h2 id="implikasi-lebih-luas">5. Implikasi Lebih Luas dari Scientific Thinking</h2>
+
+ 
+
+<h3>Kebijakan Publik</h3>
+
+<p>
+Scientific thinking mendorong kita untuk tidak lagi menerima suatu kebijakan hanya karena “terlihat bagus”, terdengar idealis, atau sesuai dengan ideologi tertentu. Setiap kebijakan publik yang serius harus memiliki <strong>metrik keberhasilan yang jelas dan terukur</strong>.
+</p>
+
+<p>
+Contoh paling sering dibahas adalah bidang pendidikan. Ketika kita mengatakan ingin “pendidikan yang bagus”, pertanyaannya adalah: bagus seperti apa? Apakah diukur dari nilai ujian nasional, tingkat literasi, kreativitas siswa, kesiapan memasuki dunia kerja, pembentukan karakter, atau kombinasi dari semuanya? Tanpa definisi dan indikator yang konkret, kita tidak akan pernah tahu apakah program pendidikan yang sudah berjalan puluhan tahun itu berhasil atau justru gagal.
+</p>
+
+<p>
+Hal yang sama berlaku untuk kesehatan, ekonomi, pertanian, hingga reformasi birokrasi. Scientific thinking menuntut adanya <em>proof of success</em> — bukti nyata bahwa kebijakan tersebut benar-benar menghasilkan perubahan positif sesuai tujuan yang didefinisikan di awal.
+</p>
+   <div class="callout callout-warning reveal">
+          <span class="callout-icon"><i class="fas fa-triangle-exclamation"></i></span>
+          <div class="callout-body">
+            <p><strong>Peringatan:</strong> Hindari <em>copy-paste</em> kebijakan dari negara lain tanpa mengecek variabel atau konteks lokal — seperti iklim, budaya, dan kondisi ekonomi. Tanpa kerangka ilmiah, kebijakan mudah menjadi eksperimen buta yang membuang sumber daya selama puluhan tahun.</p>
+          </div>
+        </div>
+
+ 
+
+<h3>Ideologi dan Preferensi</h3>
+
+<p>
+Ideologi bukanlah musuh sains. Justru sebaliknya, ideologi bisa menjadi jauh lebih efektif dan powerful apabila didukung oleh kerangka scientific thinking.
+</p>
+        <div class="callout callout-info reveal">
+          <span class="callout-icon"><i class="fas fa-circle-info"></i></span>
+          <div class="callout-body">
+            <p><strong>Konteks:</strong> Ideologi sering dianggap musuh sains karena cenderung memaksakan nilai dan preferensi (apa yang seharusnya terjadi) ke dalam ranah <strong>fakta objektif</strong> yang menjadi wilayah sains. Ketika sebuah ideologi menolak bukti ilmiah, memanipulasi data, atau mempertahankan keyakinan meskipun bertentangan dengan hasil penelitian yang kuat, sains melihatnya sebagai penghambat objektivitas dan kemajuan pengetahuan. Contoh klasiknya adalah ketika ideologi politik atau agama menolak teori evolusi, data perubahan iklim, atau temuan genetika demi mempertahankan narasi kelompoknya. Inilah yang membuat banyak ilmuwan menganggap ideologi bersifat dogmatis dan anti-bukti.</p>
+          </div>
+        </div>
+<p>
+Ideologi pada dasarnya berbicara tentang nilai, tujuan, dan preferensi — yaitu seperti apa masyarakat yang kita inginkan, apa yang dianggap baik dan buruk, serta arah yang hendak dituju. Sains tidak bisa menentukan nilai-nilai ini karena sains berfokus pada ranah fakta dan realitas objektif. Namun, scientific thinking sangat membantu dalam pelaksanaan dan evaluasi ideologi tersebut.
+</p>
+
+<p>
+Pertanyaan kunci yang selalu diajukan dalam podcast adalah: “Proof of success-nya apa? Kondisi masyarakat seperti apa yang bisa dikatakan tujuan ideologi ini sudah tercapai?” Tanpa jawaban yang jelas dan terukur, sebuah ideologi mudah menjadi kabur, ambigu, dan sulit dievaluasi. Akibatnya, orang bisa terus berdebat puluhan tahun tanpa tahu apakah sedang maju atau justru mundur.
+</p>
+
+<p>
+Scientific thinking membantu mengubah konsep abstrak seperti keadilan, kesetaraan, atau kemajuan menjadi sesuatu yang lebih konkret sehingga bisa diukur dan diuji. Dengan begitu, kita bisa melihat apakah program atau kebijakan yang dijalankan benar-benar mendekatkan kita ke tujuan yang diinginkan atau malah menjauh. Perdebatan antarideologi pun menjadi lebih produktif karena tidak lagi hanya soal emosi dan identitas, melainkan juga soal bukti dan hasil nyata.
+</p>
+
+<p>
+Contoh yang diangkat dalam podcast adalah feminisme. Alih-alih hanya berdebat secara prinsip, pertanyaan ilmiahnya adalah: kondisi seperti apa yang bisa kita sepakati sebagai “feminisme sudah tercapai”? Apakah tingkat pendidikan perempuan, partisipasi kerja, kesejahteraan, atau penurunan kekerasan? Tanpa definisi yang jelas, sulit menilai apakah suatu kebijakan mendukung atau justru bertentangan dengan tujuan tersebut.
+</p>
+
+<p>
+Intinya, scientific thinking tidak mengubah nilai inti ideologi Anda, tetapi membuatnya lebih efektif, accountable, dan adaptif terhadap realitas. Ideologi memberi arah, sementara scientific thinking memberi peta dan kompas yang akurat agar arah tersebut benar-benar bisa dicapai.
+</p>
+
+
+        <h3>Hubungan Sains dengan Agama &amp; Ranah Nilai</h3>
+
+        <div class="concept-card reveal">
+          <div class="concept-label">Pembedaan Ranah</div>
+          <div class="concept-term">Fakta vs. Nilai</div>
+          <p class="concept-body"><strong>Ranah Realitas (Fakta):</strong> Sains beroperasi di sini. Fokusnya mendeskripsikan "apa adanya" melalui metode empiris.<br><br><strong>Ranah Preferensi/Nilai:</strong> Domain agama, filsafat, etika, dan moral. Sains tidak bisa menjawab "apa yang seharusnya" atau "mana yang baik secara moral".</p>
+        </div>
+
+        <p>
+          Hubungan yang ideal bukan "versus", melainkan <strong>saling melengkapi</strong>. Sains memberikan peta realitas yang akurat, sehingga membantu kita membuat keputusan nilai yang lebih <em>informed</em>. Agama dan filsafat memberikan arah dan batasan nilai — mencegah sains digunakan secara tidak bertanggung jawab. Banyak ilmuwan beragama yang justru melihat sains sebagai cara memahami ciptaan Tuhan.
+        </p>
+
+        <!-- PENUTUP -->
+        <h2 id="penutup">Penutup: Sains adalah Proses, Bukan Hasil</h2>
+
+        <p>
+          Pada akhirnya, sains adalah sebuah perjalanan. Ia menuntut kita untuk selalu skeptis terhadap diri sendiri sebelum skeptis terhadap orang lain. Pengetahuan kita selalu bisa direvisi dengan bukti baru — dan itu bukan kelemahan, itu adalah kekuatan terbesar metodologi ilmiah.
+        </p>
+
+        <blockquote class="pull-quote reveal">
+          <p>Budaya berpikir ilmiah membantu kita menjadi lebih bijak — bukan karena kita tahu segalanya, tetapi karena kita tahu cara membuktikan dan memastikan bahwa sesutu itu benar atau salah.</p>
+        </blockquote>
+
+        <p>
+          Tiga poin paling penting untuk dibawa pulang: pertama, selalu bedakan metode dan kesimpulan. Kedua, tanya selalu — definisi apa? Diukur bagaimana? Bisa diuji? Bisa diprediksi? Dan ketiga, budaya berpikir ilmiah bermanfaat untuk semua orang, di semua bidang kehidupan — bukan hanya di laboratorium.
+        </p>
+        
+        <div class="video-wrap reveal">
+          <div class="video-label"><i class="fas fa-play-circle"></i> Reference Video</div>
+          <div class="video-iframe-wrap">
+            <!-- GANTI: src dengan URL embed YouTube yang benar -->
+            <iframe
+              src="https://www.youtube.com/embed/9kWsciuCUio"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              title="Judul Video Referensi">
+            </iframe>
+          </div>
+        </div>
+
+      </div><!-- /prose -->
+
+      <!-- ──────────────────────────────────────
+           REFERENCES
+      ────────────────────────────────────── -->
+      <div class="references-section reveal">
+        <div class="references-title"><i class="fas fa-book-open"></i> Referensi</div>
+        <ol class="references-list">
+          <li>
+            <div><strong>Cania Cita &amp; Sabda.</strong> <em>Pahami Ini Dulu Sebelum Bahas Agama dan Sains.</em> Podcast, 2024–2025.</div>
+          </li>
+          <li>
+            <div><strong>Popper, Karl.</strong> <em>The Logic of Scientific Discovery.</em> Routledge, 1959. — Sumber konsep falsifiabilitas.</div>
+          </li>
+          <li>
+            <div><strong>Kuhn, Thomas S.</strong> <em>The Structure of Scientific Revolutions.</em> University of Chicago Press, 1962. — Konteks pergeseran paradigma ilmiah.</div>
+          </li>
+        </ol>
+      </div>
+
+      <!-- ──────────────────────────────────────
+           FEEDBACK & SHARE
+      ────────────────────────────────────── -->
+      <div class="article-feedback reveal">
+        <div class="reaction-group">
+          <button class="reaction-btn" data-response="menyala">
+            <i class="fas fa-fire"></i> Menyala
+          </button>
+          <button class="reaction-btn" data-response="informatif">
+            <i class="fas fa-brain"></i> Informatif
+          </button>
+          <button class="reaction-btn" data-response="kurang">
+            <i class="far fa-face-meh"></i> Kurang
+          </button>
+        </div>
+        <button class="share-btn" id="share-btn">
+          <i class="fas fa-share-nodes"></i> Bagikan
+        </button>
+      </div>
+
+      <!-- ──────────────────────────────────────
+           RELATED ARTICLES
+      ────────────────────────────────────── -->
+      <div class="related-section reveal">
+        <div class="section-label"><i class="fas fa-layer-group"></i> Artikel Terkait</div>
+        <div class="related-grid">
+          <a href="keepingtheemberalive.html" class="related-card">
+            <span class="related-card-category">Filsafat &amp; Kontemporer</span>
+            <div class="related-card-title">Keeping the Ember Alive</div>
+          </a>
+          <a href="duniahitamputih.html" class="related-card">
+            <span class="related-card-category">Sosial-Politik</span>
+            <div class="related-card-title">Dunia Hitam Putih</div>
+          </a>
+        </div>
+      </div>
+
+    </article><!-- /article-content -->
+
+    <!-- ========== SIDEBAR TOC ========== -->
+    <aside class="toc-sidebar">
+      <div class="toc-box">
+        <div class="toc-title"><i class="fas fa-list"></i> Daftar Isi</div>
+        <ul class="toc-list" id="toc-list">
+          <!-- Diisi otomatis oleh JS -->
+        </ul>
+      </div>
+    </aside>
+
+  </div><!-- /article-layout -->
+
+  <!-- ========== FOOTER ========== -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">Bvandia <span>Science</span> Journey</div>
+      <p class="footer-tagline">Exploring science, ideas, and reflections about the world.</p>
+      <div class="footer-social">
+        <a href="mailto:bimasaktiawannn@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        <a href="https://www.instagram.com/bvandia" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.tiktok.com/@bvandia.science" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+        <a href="https://www.linkedin.com/in/bima-saktiawan-502875352" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      </div>
+
+      <!-- Visitor Counter -->
+      <div class="visitor-counter">
+        <span class="counter-label">
+          <i class="fas fa-eye"></i> Total Kunjungan
+        </span>
+        <img 
+          src="https://hits.sh/bvandi34a-science-journey.netlify.app/apaitusains.svg?style=flat-square&color=f2a900&labelColor=0a0a0a&label=%20" 
+          alt="visitor counter"
+          class="counter-badge"
+        />
+      </div>
+
+      <p class="footer-copy">© 2026 Bvandia Science Journey · Built with curiosity</p>
+    </div>
+  </footer>
+
+  <!-- ========== EmailJS SDK ========== -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <!-- ========== SCRIPTS ========== -->
+  <script>
+    // ── READING PROGRESS BAR
+    window.addEventListener('scroll', () => {
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      document.getElementById('reading-progress').style.width = ((scrollTop / scrollHeight) * 100) + '%';
+    });
+
+    // ── READING TIME
+    document.addEventListener('DOMContentLoaded', () => {
+      const prose = document.getElementById('article-prose');
+      if (prose) {
+        const words = prose.innerText.trim().split(/\s+/).length;
+        document.getElementById('reading-time').textContent = Math.ceil(words / 200);
+      }
+    });
+
+    // ── AUTO GENERATE TOC
+    document.addEventListener('DOMContentLoaded', () => {
+      const headings = document.querySelectorAll('.prose h2');
+      const tocList = document.getElementById('toc-list');
+      if (!tocList) return;
+
+      headings.forEach(h => {
+        if (!h.id) {
+          h.id = h.textContent.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+        }
+        const li = document.createElement('li');
+        li.innerHTML = `<a href="#${h.id}">${h.textContent}</a>`;
+        tocList.appendChild(li);
+      });
+
+      // TOC active highlight on scroll
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          const id = entry.target.getAttribute('id');
+          const link = tocList.querySelector(`a[href="#${id}"]`);
+          if (link) link.classList.toggle('active', entry.isIntersecting);
+        });
+      }, { rootMargin: '-20% 0% -70% 0%' });
+
+      headings.forEach(h => observer.observe(h));
+    });
+
+    // ── SCROLL REVEAL
+    document.addEventListener('DOMContentLoaded', () => {
+      const reveals = document.querySelectorAll('.reveal');
+      const revealObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      reveals.forEach(el => revealObserver.observe(el));
+    });
+
+    // ── HAMBURGER MENU
+    document.getElementById('hamburger')?.addEventListener('click', () => {
+      document.getElementById('main-nav').classList.toggle('open');
+    });
+
+    // ── EMAILJS INIT
+    emailjs.init('iBzBlCz0Yz5iIT_gW');
+
+    // ── TOAST HELPER
+    function showToast(icon, message) {
+      let toast = document.getElementById('feedback-toast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'feedback-toast';
+        toast.className = 'feedback-toast';
+        document.body.appendChild(toast);
+      }
+      toast.innerHTML = `<i class="${icon}"></i> ${message}`;
+      toast.classList.add('show');
+      clearTimeout(toast._timer);
+      toast._timer = setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+    // ── REACTION BUTTONS
+    let reactionSent = false;
+    document.querySelectorAll('.reaction-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        if (reactionSent) return;
+        reactionSent = true;
+
+        const response = btn.dataset.response;
+        const labels = { menyala: '🔥 Menyala', informatif: '🧠 Informatif', kurang: '😑 Kurang' };
+
+        // Visual feedback langsung
+        document.querySelectorAll('.reaction-btn').forEach(b => {
+          b.classList.toggle('active', b === btn);
+          b.classList.toggle('disabled', b !== btn);
+        });
+
+        showToast('fas fa-paper-plane', 'Mengirim feedback...');
+
+        try {
+          await emailjs.send('service_26uhlsy', 'template_dowhmdr', {
+            article_title: document.title,
+            reader_response: labels[response] || response,
+            page_url: window.location.href,
+            time: new Date().toLocaleString('id-ID', { dateStyle: 'full', timeStyle: 'short' })
+          });
+
+          showToast('fas fa-check-circle', `Terima kasih! Kamu memilih "${labels[response] || response}"`);
+        } catch (err) {
+          showToast('fas fa-heart', `Feedback "${labels[response] || response}" tercatat!`);
+          console.warn('EmailJS error:', err);
+        }
+      });
+    });
+
+    // ── SHARE BUTTON
+    document.getElementById('share-btn')?.addEventListener('click', () => {
+      if (navigator.share) {
+        navigator.share({
+          title: document.title,
+          text: 'Aku baru membaca tulisan ini, mungkin kamu juga tertarik.',
+          url: window.location.href
+        });
+      } else {
+        const url = encodeURIComponent(window.location.href);
+        const text = encodeURIComponent('Aku baru membaca tulisan ini:');
+        window.open(`https://wa.me/?text=${text}%20${url}`, '_blank');
+      }
+    });
+
+    // ── AUTO ACTIVE NAV
+    document.addEventListener('DOMContentLoaded', () => {
+      const currentPage = location.pathname.split('/').pop() || 'index.html';
+      document.querySelectorAll('nav a').forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === currentPage);
+      });
+    });
+  </script>
+<script src="transition.js"></script>
+
+</body>
+</html>
